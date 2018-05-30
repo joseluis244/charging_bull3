@@ -1,0 +1,12 @@
+{
+    "http":{    
+        "http_puerto":80,
+        "https_puerto":443
+    },
+    "database":{
+        "url":"localhost/",
+        "DB":"RB2"
+    },
+    "asd":[12323,123123],
+    "22":[{"qwe":123,"ert":"asd"}]
+}

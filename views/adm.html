@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Main</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <style>
+    .RBDH{
+        width: 100%;
+        height: 12rem;
+        background-color: lightgray;
+    }
+    .foto{
+        width: 100%;
+        height: 100%;
+        background-image: url("/html/img/charging-bull-on-wall.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position-x: center;
+    }
+    .buscador{
+        width: 100%;
+        background-color: azure;
+        border: 0px;
+        height: 25px;
+    }
+    .buscador:focus{
+        outline: none;
+    }
+    li{
+        background-color: lightgrey;
+        margin-bottom: 5px;
+    }
+    .icono{
+        width: 3.5rem;
+        height: 3rem;
+    }
+    </style>
+</head>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout-icon"></div>
+            <div class="mdl-layout__header-row">
+                <span class="mdl-layout__title">Red Bull</span>
+                <div class="mdl-layout-spacer"></div>
+                <div><%= nombre =></div>
+            </div>
+        </header>
+
+        <div class="mdl-layout__drawer">
+            <header class="RBDH">
+                <div class="foto"></div> 
+            </header>
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="">Inicio</a>
+                <a class="mdl-navigation__link" href="#clientes" onclick="cargar()">Ver Clientes</a>
+                <a class="mdl-navigation__link" href="#materiales" onclick="cargar()">Ver Materiales</a>
+                <a class="mdl-navigation__link" href="./registrarcli">Registrar Clientes</a>
+                <a class="mdl-navigation__link" href="./configuraciones">Configuraciones</a>
+                <a class="mdl-navigation__link" href="./logout"><strong>Salir</strong></a>
+            </nav>
+        </div>
+
+
+        <main class="mdl-layout__content">
+
+            <div style="text-align: center; margin-top: 5rem" id="loader">
+                <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+            </div>
+            <div id="contenido" style="display: none"></div>
+                
+            
+        </main>
+    </div>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script>
+        function cargar(){
+            $("#loader").hide();
+            $("#contenido").show();
+            setTimeout(()=>{
+                carga = document.location.href.split("#")[1]
+                $("#contenido").html(carga);
+            },2)
+        };
+    </script>
+</body>
+</html>

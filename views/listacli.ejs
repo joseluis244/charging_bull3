@@ -1,0 +1,71 @@
+
+            <style>
+            .mdl-list__item-sub-title{
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+            .busqueda_cont{
+                display: grid;
+                grid-template-columns: auto;
+                
+            }
+            </style>
+                <div class="busqueda_cont">
+                    <div class="busqueda_item" style="text-align: center;padding: 20px;">
+                        <input type="text" placeholder="Buscar..." onkeyup="buscar()" style="width: 90%; font-size: 16px;" id="buscador">    
+                    </div>
+                </div>
+            <div class="mdl-grid mdl-grid--no-spacing">
+                <div class="mdl-cell--1-col-desktop mdl-cell--hide-tablet"></div>
+                <div class="mdl-cell--10-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone" style="padding: 5px;">
+                    <ul class="mdl-list">
+
+                        <% for(i=0;i<=cliente.length-1;i++){ %>
+                            <%
+                             var icon = cliente[i].tipo;
+                             switch(icon){
+                                 case "Mayorista":
+                                    var iconoo = "local_grocery_store";
+                                    break;
+                                default:
+                                    var iconoo = "store";
+                             }
+                            %>
+                        <li class="mdl-list__item mdl-list__item--two-line" onclick="ira(`?cli=<%= cliente[i]._id %>`)">                            
+                            <div class="icono">
+                                <i class="material-icons" style="font-size: 3rem"><%= iconoo %></i>
+                            </div>
+                            <span class="mdl-list__item-primary-content">    
+                                <span><%= cliente[i].nombre %></span>
+                                <span class="mdl-list__item-sub-title"><%= cliente[i].direccion %></span>
+                            </span>
+                        </li>
+                        <% } %>
+
+
+
+                    </ul>
+                </div>
+                <div class="mdl-cell--1-col-desktop mdl-cell--hide-tablet"></div>
+            </div>
+            <script>
+            function ira(cod){
+                window.location.href = "cliente"+cod
+            }
+            function buscar(){
+                var li = document.getElementsByTagName("li");
+                var buscar = document.getElementById("buscador").value;
+                var filtro = buscar.toUpperCase();
+                for(i=0;i<=li.length-1;i++){
+                    var span1 = li[i].getElementsByTagName("span")[0].getElementsByTagName("span");
+                    if(span1[0].innerHTML.toUpperCase().indexOf(filtro)> -1){
+                        li[i].style.display = "";
+                    }
+                    else{
+                        li[i].style.display = "none";
+                    }
+                    
+                }
+            }
+            </script>

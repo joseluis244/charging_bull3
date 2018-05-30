@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Marker Clustering</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      .contenedor{
+        display: grid;
+        grid-template-columns: auto auto;
+        width: 130px;
+      }
+      .datos2{
+        display: grid;
+        grid-template-columns: auto;
+        align-content: center;
+      }
+      #leyenda{
+        display: grid;
+        grid-template-columns: auto auto auto auto auto auto auto auto;
+        position: fixed;
+        z-index: 1;
+        background-color: white;
+        right: 0px;
+        left: 0px;
+        opacity: 0.96;
+      }
+      .color{
+        height: 35px;
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 40px;         
+      }
+      .letra{
+        padding-left: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="leyenda">
+
+      <div class="contenedor">
+        <div class="datos1">
+          <div class="color" style='background-image: url("/cluster/cluster/a1.png");'></div>
+          <div class="letra">A</div>
+        </div>
+        <div class="datos2">Farmacia</div>
+      </div>
+      <div class="contenedor">
+        <div class="datos1">
+          <div class="color" style='background-image: url("/cluster/cluster/b1.png");'></div>
+          <div class="letra">B</div>
+        </div>
+        <div class="datos2">Kiosko</div>
+      </div>
+      <div class="contenedor">
+        <div class="datos1">
+          <div class="color" style='background-image: url("/cluster/cluster/c1.png");'></div>
+          <div class="letra">C</div>
+        </div>
+        <div class="datos2">Licoreria</div>
+      </div>
+      <div class="contenedor">
+        <div class="datos1">
+          <div class="color" style='background-image: url("/cluster/cluster/d1.png");'></div>
+          <div class="letra">D</div>
+        </div>
+        <div class="datos2">Mayorista</div>
+      </div>
+      <div class="contenedor">
+        <div class="datos1">
+          <div class="color" style='background-image: url("/cluster/cluster/e1.png");'></div>
+          <div class="letra">E</div>
+        </div>
+        <div class="datos2">Micromercado</div>
+      </div>
+      <div class="contenedor">
+        <div class="datos1">
+          <div class="color" style='background-image: url("/cluster/cluster/f1.png");'></div>
+          <div class="letra">F</div>
+        </div>
+        <div class="datos2">Minorista</div>
+      </div>
+      <div class="contenedor">
+        <div class="datos1">
+          <div class="color" style='background-image: url("/cluster/cluster/g1.png");'></div>
+          <div class="letra">G</div>
+        </div>
+        <div class="datos2">Otro Impulso</div>
+      </div>
+      <div class="contenedor">
+        <div class="datos1">
+          <div class="color" style='background-image: url("/cluster/cluster/h1.png");'></div>
+          <div class="letra">H</div>
+        </div>
+        <div class="datos2">Tienda de barrio</div>
+      </div>
+
+    </div>
+    <div id="map"></div>
+    <script>
+
+      function initMap() {
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 7,
+          center: {lat: -17.3336756, lng: -64.9404421}
+        });
+
+        // Create an array of alphabetical characters used to label the markers.
+
+        // Add some markers to the map.
+        // Note: The code uses the JavaScript Array.prototype.map() method to
+        // create an array of markers based on a given "locations" array.
+        // The map() method here has nothing to do with the Google Maps API.
+        var markers = locations0.map(function(location) {
+          return new google.maps.Marker({
+            position: location,
+            label:"A"
+          });
+        });
+
+        var markers2 = locations1.map(function(location2) {
+          return new google.maps.Marker({
+            position: location2,
+            label:"B"
+          });
+        });
+        var markers3 = locations2.map(function(location3) {
+          return new google.maps.Marker({
+            position: location3,
+            label:"C"
+          });
+        });
+        var markers4 = locations3.map(function(location4) {
+          return new google.maps.Marker({
+            position: location4,
+            label:"D"
+          });
+        });
+        var markers5 = locations4.map(function(location5) {
+          return new google.maps.Marker({
+            position: location5,
+            label:"E"
+          });
+        });
+        var markers6 = locations5.map(function(location6) {
+          return new google.maps.Marker({
+            position: location6,
+            label:"F"
+          });
+        });
+        var markers7 = locations6.map(function(location7) {
+          return new google.maps.Marker({
+            position: location7,
+            label:"G"
+          });
+        });
+        var markers8 = locations7.map(function(location8) {
+          return new google.maps.Marker({
+            position: location8,
+            label:"H",
+          });
+        });
+        // Add a marker clusterer to manage the markers.*/
+        var markerCluster = new MarkerClusterer(map, markers,{imagePath: '/cluster/cluster/a'});
+        var markerCluster2 = new MarkerClusterer(map, markers2,{imagePath: '/cluster/cluster/b'});
+        var markerCluster3 = new MarkerClusterer(map, markers3,{imagePath: '/cluster/cluster/c'});
+        var markerCluster4 = new MarkerClusterer(map, markers4,{imagePath: '/cluster/cluster/d'});
+        var markerCluster5 = new MarkerClusterer(map, markers5,{imagePath: '/cluster/cluster/e'});
+        var markerCluster6 = new MarkerClusterer(map, markers6,{imagePath: '/cluster/cluster/f'});
+        var markerCluster7 = new MarkerClusterer(map, markers7,{imagePath: '/cluster/cluster/g'});
+        var markerCluster8 = new MarkerClusterer(map, markers8,{imagePath: '/cluster/cluster/h'});
+      }
+      
+        //ejs
+        <%var x=1%>
+          var locations0 =[
+        <%while(cli[x].tipo == cli[x-1].tipo){%>
+            {lat:<%= cli[x-1].GPS[0] %>,lng:<%= cli[x-1].GPS[1] %>},
+        <%x=x+1
+        }%>
+        ]
+        <%var x=x+1%>
+        var locations1 =[
+        <%while(cli[x].tipo == cli[x-1].tipo){%>
+            {lat:<%= cli[x-1].GPS[0] %>,lng:<%= cli[x-1].GPS[1] %>},
+        <%x=x+1
+        }%>
+        ]
+        <%var x=x+1%>
+        var locations2 =[
+        <%while(cli[x].tipo == cli[x-1].tipo){%>
+            {lat:<%= cli[x-1].GPS[0] %>,lng:<%= cli[x-1].GPS[1] %>},
+        <%x=x+1
+        }%>
+        ]
+        <%var x=x+1%>
+        var locations3 =[
+        <%while(cli[x].tipo == cli[x-1].tipo){%>
+            {lat:<%= cli[x-1].GPS[0] %>,lng:<%= cli[x-1].GPS[1] %>},
+        <%x=x+1
+        }%>
+        ]
+        <%var x=x+1%>
+        var locations4 =[
+        <%while(cli[x].tipo == cli[x-1].tipo){%>
+            {lat:<%= cli[x-1].GPS[0] %>,lng:<%= cli[x-1].GPS[1] %>},
+        <%x=x+1
+        }%>
+        ]
+        <%var x=x+1%>
+        var locations5 =[
+        <%while(cli[x].tipo == cli[x-1].tipo){%>
+            {lat:<%= cli[x-1].GPS[0] %>,lng:<%= cli[x-1].GPS[1] %>},
+        <%x=x+1
+        }%>
+        ]
+        <%var x=x+1%>
+        var locations6 =[
+        <%while(cli[x].tipo == cli[x-1].tipo){%>
+            {lat:<%= cli[x-1].GPS[0] %>,lng:<%= cli[x-1].GPS[1] %>},
+        <%x=x+1
+        }%>
+        ]
+        <%var x=x+1%>
+
+        var locations7 =[
+          <%while(x<=cli.length-1){%>
+            {lat:<%= cli[x-1].GPS[0] %>,lng:<%= cli[x-1].GPS[1] %>},
+            <%x=x+1%>
+          <%}%>
+        ]
+
+
+
+    </script>
+    <script src="/cluster/cluster/markerclusterer.js">
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOfoCLTTmvfANgGf06S8H-4VfqfLVxo70&callback=initMap">
+    </script>
+  </body>
+</html>

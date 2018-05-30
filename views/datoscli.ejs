@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+</head>
+<body>
+    <div class="mdl-grid">
+        <div class="mdl-cell mdl-cell--4-col"><h6>Distribuye:<% if(distribuye==true){%> Si<%}else{%> No<%}%></h6> </div>
+        <div class="mdl-cell mdl-cell--4-col"><h6>Distribuidor:<%=distribuidor%></h6> </div>
+        <div class="mdl-cell mdl-cell--4-col"><h6>Frio:<% if(frio==true){%> Si<%}else{%> No<%}%></h6></div>
+        <div class="mdl-cell mdl-cell--4-col">
+            <table class="mdl-data-table mdl-js-data-table" style="width: 100%">
+                <thead class="mdl-color--indigo-500">
+                    <tr>
+                        <th class="mdl-data-table__cell--non-numeric mdl-color-text--grey-50">Visibility</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%for(i=0;i<=visibility.length-1;i++){%>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric"><%= visibility[i] %></td>
+                    </tr>
+                    <%}%>
+                </tbody>
+            </table>
+        </div>
+        <div class="mdl-cell mdl-cell--4-col">
+            <table class="mdl-data-table mdl-js-data-table" style="width: 100%">
+                <thead class="mdl-color--indigo-500">
+                    <tr>
+                        <th class="mdl-data-table__cell--non-numeric mdl-color-text--grey-50">Coolers</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%for(i=0;i<=cooler.length-1;i++){%>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric"><%= cooler[i] %></td>
+                    </tr>
+                    <%}%>
+                </tbody>
+            </table>
+        </div>
+        <div class="mdl-cell mdl-cell--4-col">
+            <table class="mdl-data-table mdl-js-data-table" style="width: 100%">
+                <thead class="mdl-color--indigo-500">
+                    <tr>
+                        <th class="mdl-data-table__cell--non-numeric mdl-color-text--grey-50">Producto</th>
+                        <th class="mdl-color-text--grey-50">Precio(Bs.)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%for(i=0;i<=productos.length-1;i++){%>
+                        <%if(productos[i].P_precio > 0 || productos[i].P_precio != null){%>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric"><%= productos[i].P_nombre %></td>
+                        <td><%= productos[i].P_precio %></td>
+                    </tr>
+                        <%}%>
+                    <%}%>
+                </tbody>
+            </table>
+        </div>
+        <%if(share.redbull != null && share.otro != null){%>
+        <div class="mdl-cell mdl-cell--4-col">
+            <table class="mdl-data-table mdl-js-data-table" style="width: 100%">
+                <thead class="mdl-color--indigo-500">
+                    <tr>
+                        <th class="mdl-data-table__cell--non-numeric mdl-color-text--grey-50">Share</th>
+                        <th class="mdl-color-text--grey-50">#caras</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric">Red Bull</td>
+                        <td><%=share.redbull%></td>
+                    </tr>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric">Otros</td>
+                        <td><%=share.otro%></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <%}%>
+    </div>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>    
+</body>
+</html>

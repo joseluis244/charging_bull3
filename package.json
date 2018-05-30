@@ -1,0 +1,29 @@
+{
+  "name": "chargin_bull2",
+  "version": "1.0.0",
+  "description": "mejorado",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "jose luis C",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cities": "^1.1.2",
+    "cookie-parse": "^0.4.0",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.5.8",
+    "express": "^4.16.3",
+    "express-favicon": "^2.0.0",
+    "express-force-ssl": "^0.3.2",
+    "express-session": "^1.15.6",
+    "eyes": "^0.1.8",
+    "json2xls": "^0.1.2",
+    "mongoose": "^5.0.13",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "request": "^2.85.0",
+    "xml2js": "^0.4.19"
+  }
+}

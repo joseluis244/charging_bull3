@@ -1,0 +1,34 @@
+{ 
+    "_id" : ObjectId("5ad35aa8ba74f2031de76791"), 
+    "nombre" : "Cooler", 
+    "lista" : [
+        "Propio", 
+        "Baby Cooler", 
+        "Slim Cooler", 
+        "Can Cooler", 
+        "Equipo de la competencia", 
+        "Fast Lane Open", 
+        "Small Open Front", 
+        "Mega Glass Door", 
+        "Slim Fast Lane", 
+        "Refuel Cooler"
+    ]
+}
+{ 
+    "_id" : ObjectId("5ad35aa8ba74f2031de76792"), 
+    "nombre" : "Visibility", 
+    "lista" : [
+        "Colgante", 
+        "Sticker de lata", 
+        "Marca Precio", 
+        "Cartoon", 
+        "Lata Aluminio", 
+        "Sticky shlef", 
+        "Carrileras", 
+        "Two Cans", 
+        "Parasite SC", 
+        "Parasite 4Pack", 
+        "Dispensador Lata", 
+        "Rack"
+    ]
+}

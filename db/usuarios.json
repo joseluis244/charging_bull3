@@ -1,0 +1,27 @@
+{ 
+    "_id" : ObjectId("5ad216baba74f2031de766bb"), 
+    "username" : "MIservicio", 
+    "password" : "MIservicio", 
+    "nombre" : "Servicio", 
+    "tipo" : "adm", 
+    "permiso" : "adm", 
+    "estado" : 1.0
+}
+{ 
+    "_id" : ObjectId("5ad4a434ba74f2031de767e3"), 
+    "username" : "adm", 
+    "password" : "adm", 
+    "nombre" : "Administrador", 
+    "tipo" : "adm", 
+    "permiso" : "adm", 
+    "estado" : 1.0
+}
+{ 
+    "_id" : ObjectId("5ad4a455ba74f2031de767e4"), 
+    "username" : "usuario", 
+    "password" : "usuario", 
+    "nombre" : "Usuario", 
+    "tipo" : "usr", 
+    "permiso" : "usr", 
+    "estado" : 1.0
+}

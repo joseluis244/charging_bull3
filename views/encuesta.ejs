@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Encuesta</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <link rel="icon" href="img/redbull-icon.png" type="img/gif" sizes="16x16">
+    <style>
+        .seccion{
+            border-bottom: 1px solid #CFD8DC;
+        }
+        .subtitulo{
+            margin: 5px;
+        }
+        select{
+            border: 0px;
+            border-bottom: 1px solid #CFD8DC;
+            background: white;
+        }
+        select:focus{
+            outline: none;
+        }
+        @media screen and (max-width: 380px) {
+            #fecha_D{
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+            <span class="mdl-layout__title"><%= nombrecli %></span>
+            <div class="mdl-layout-spacer"></div>
+            <span id="fecha_D">12/04/2018</span>
+            </div>
+        </header>
+        <main class="mdl-layout__content" style="padding: 5px">
+            <input type="hidden" value="<%= cli_id %>" name="cli_ID">
+            <input type="hidden" value="20180412" name="fecha_reg" id="fecha_reg2">
+            <!--secciones-->
+            <div class="secciones">
+                <h5 class="subtitulo">Vende energizante</h5>
+                <div class="seccion mdl-grid" onchange="cambio1()">
+                    <div class="mdl-cell mdl-cell--2-col">
+                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="si">
+                            <input type="radio" id="si" class="mdl-radio__button" name="distribuye" value="si" checked>
+                            <span class="mdl-radio__label">Si</span>
+                        </label>
+                    </div>
+                    <div class="mdl-cell mdl-cell--2-col">
+                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="no">
+                            <input type="radio" id="no" class="mdl-radio__button" name="distribuye" value="no">
+                            <span class="mdl-radio__label">No</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <!--fin-->
+            <!--secciones-->
+            <div class="secciones">
+                <h5 class="subtitulo">Distribuidor de Red Bull</h5>
+                <div class="seccion mdl-grid">
+                    <div class="mdl-cell mdl-cell--4-col" onchange="distribuye()">
+                        <select name="Distribuidor" id="dis" style="width: 100%">
+                            <option value="ninguno">ninguno</option>
+                            <% for(i=0;i<=distribuidores.length-1;i++){%>
+                            <option value="<%= distribuidores[i].nombre %>"><%= distribuidores[i].nombre %></option>
+                            <%}%>
+                            <option value="otro">otro</option>
+                        </select>
+                        <div style="display: none" id="contenedordist">
+                            <div>Nombre del distribuidor</div>
+                            <input type="text" name="Distribuidor2" value="ninguno">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--fin-->
+            <!--secciones-->
+            <div class="secciones">
+                <h5 class="subtitulo">Precios(Bs.)</h5>
+                <div class="seccion seccion3 mdl-grid">
+                    <%for(i=0;i<=bebida.length-1;i++){%>
+                    <div class="mdl-cell mdl-cell--4-col">
+                        <!-- precio -->
+                        <div style="display: grid; grid-template-columns: 120px auto">
+                            <div style="display: grid; align-content: center">
+                                <div name="nombreB"><%= bebida[i].nombre %></div>
+                            </div>
+                            <div onchange="precio('<%=i%>');">
+                                <!-- valor -->
+                                <div>
+                                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="<%=i%>P0">
+                                        <input type="radio" id="<%=i%>P0" class="mdl-radio__button" name="precios<%=i%>" value="0" checked>
+                                        <span class="mdl-radio__label">No vende</span>
+                                    </label>
+                                </div>
+                                <%for(j=0;j<=bebida[i].precios.length-1;j++){ %>
+                                <div>
+                                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="<%=i%>P<%=j+1%>">
+                                        <input type="radio" id="<%=i%>P<%=j+1%>" class="mdl-radio__button" name="precios<%=i%>" value="<%=bebida[i].precios[j]%>">
+                                        <span class="mdl-radio__label"><%=bebida[i].precios[j]%></span>
+                                    </label>
+                                </div>
+                                <%}%>
+                                <div>
+                                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="<%=i%>P<%=bebida[i].precios.length+1%>">
+                                        <input type="radio" id="<%=i%>P<%=bebida[i].precios.length+1%>" class="mdl-radio__button" name="precios<%=i%>" value="-1">
+                                        <span class="mdl-radio__label">otro</span>
+                                    </label>
+                                </div>
+                                <!-- fin valor -->
+                            </div>
+                            <div style="grid-column: 1/3; display: none" id="D<%=i%>">
+                                <input type="text" name="preciosB" id="V<%=i%>" value="0">
+                            </div>
+                        </div>
+                        <!-- finprecio -->
+                    </div>
+                    <%}%>
+                    <div class="mdl-cell mdl-cell--4-col">
+                        <!-- precio -->
+                        <div>Otro</div>
+                        <div style="display: grid; grid-template-columns: 120px auto">
+                            <div style="display: grid; align-content: center">
+                                <input type="text" placeholder="Nombre" name="nombreB">
+                            </div>
+                            <div>
+                                <input type="text" placeholder="Precio" name="preciosB">
+                            </div>
+                        </div>
+                        <!-- finprecio -->
+                    </div>
+                </div>
+            </div>
+            <!--fin-->
+            <!--secciones solo para faermacias o otros impulsos-->
+            <% if(clitipo == "Famacia" ||clitipo == "Otro Impulso" ){ %>
+            <div class="secciones">
+                <h5 class="subtitulo">Share</h5>
+                <div class="seccion seccion4 mdl-grid">
+                    <div class="mdl-cell mdl-cell--4-col">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="carasO" name="NcarasC">
+                            <label class="mdl-textfield__label" for="carasO"># caras de la categoria...</label>
+                            <span class="mdl-textfield__error">Input is not a number!</span>
+                        </div>
+                    </div>
+                    <div class="mdl-cell mdl-cell--4-col">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="carasR" name="NcarasR">
+                            <label class="mdl-textfield__label" for="carasR"># caras Red Bull...</label>
+                            <span class="mdl-textfield__error">Input is not a number!</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% } else {%>
+                <input type="hidden" name="NcarasC" value="">
+                <input type="hidden" name="NcarasR" value="">
+            <% }%>
+            <!--fin-->
+            <!--secciones-->
+            <div class="secciones">
+                <h5 class="subtitulo">Hay producto frio</h5>
+                <div class="seccion seccion5 mdl-grid">
+                    <div class="mdl-cell mdl-cell--2-col">
+                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="friosi">
+                            <input type="radio" id="friosi" class="mdl-radio__button" name="frio" value="si" checked>
+                            <span class="mdl-radio__label">Si</span>
+                        </label>
+                    </div>
+                    <div class="mdl-cell mdl-cell--2-col">
+                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="friono">
+                            <input type="radio" id="friono" class="mdl-radio__button" name="frio" value="no">
+                            <span class="mdl-radio__label">No</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <!--fin-->
+            <!--secciones-->
+            <div class="secciones">
+                <h5 class="subtitulo">Tipo de cooler</h5>
+                <div class="seccion seccion6 mdl-grid">
+                    <%for(i=0;i<=cooler.length-1;i++){ %>
+                    <div class="mdl-cell mdl-cell--4-col">
+                        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cooler<%=i%>">
+                            <input type="checkbox" id="cooler<%=i%>" class="mdl-checkbox__input" name="coolers" value="<%=cooler[i]%>">
+                            <span class="mdl-checkbox__label"><%=cooler[i]%></span>
+                        </label>
+                    </div>
+                    <%}%>
+                </div>
+            </div>
+            <!--fin-->
+            <!--secciones-->
+            <div class="secciones">
+                <h5 class="subtitulo">Material de visibility</h5>
+                <div class="seccion seccion7 mdl-grid">
+                    <%for(i=0;i<=visibility.length-1;i++){ %>
+                    <div class="mdl-cell mdl-cell--4-col">
+                        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="visibility<%=i%>">
+                            <input type="checkbox" id="visibility<%=i%>" class="mdl-checkbox__input" name="visibilitys" value="<%=visibility[i]%>">
+                            <span class="mdl-checkbox__label"><%=visibility[i]%></span>
+                        </label>
+                    </div>
+                    <%}%>
+                </div>
+            </div>
+            <!--fin-->
+            <!--secciones-->
+            <div class="seccionesN">
+                <h5 class="subtitulo">Comentarios</h5>
+                <div class="seccion seccion8 mdl-grid">
+                    <div class="mdl-textfield mdl-js-textfield mdl-cell mdl-cell--4-col">
+                        <textarea class="mdl-textfield__input" type="text" rows= "3" id="sample5" ></textarea>
+                        <label class="mdl-textfield__label" for="sample5">Comentarios...</label>
+                    </div>
+                </div>
+            </div>
+            <!--fin-->
+            <div class="mdl-grid">
+                <div class="mdl-cell mdl-cell--4-col">
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="guardar()">
+                        Guardar
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script>
+        var fecha = new Date();
+        var dd = fecha.getDate();
+        var mm = fecha.getMonth()+1;
+        var yyyy = fecha.getFullYear();
+        if(dd<10){
+            dd='0'+dd;
+        } 
+        if(mm<10){
+            mm='0'+mm;
+        }
+        var fecha = dd+'/'+mm+'/'+yyyy;
+        var fecha2 = yyyy+'-'+mm+'-'+dd;
+        document.getElementById("fecha_D").innerHTML = fecha;
+        document.getElementById("fecha_reg2").value = fecha2;
+        function guardar(){
+            var obj = {};
+            //vende
+            if($("input[name=distribuye]:checked").val()=="si"){
+                obj.vende = true;
+            }
+            else{
+                obj.vende = false;
+            }
+            //fin vende
+            //distribuidor
+            obj.distribuidor = document.getElementsByName("Distribuidor2")[0].value;
+            //fin distribuye
+            //productos
+            var bebidasN = document.getElementsByName("nombreB");
+            var bebidasP = document.getElementsByName("preciosB");
+            var bebidas= [];
+            for(i=0;i<=bebidasN.length-1;i++){
+                bebidas.push({P_nombre:bebidasN[i].innerHTML,P_precio:bebidasP[i].value});
+            }
+            obj.bebidas = bebidas;
+            //fin productos
+            //frio
+            if($("input[name=frio]:checked").val()=="si"){
+                obj.frio = true;
+            }
+            else{
+                obj.frio = false;
+            }
+            //fin frio
+            //coolers
+            var coolers = [];
+            var coolersw = document.getElementsByName("coolers");
+            for(i=0;i<=coolersw.length-1;i++){
+                if(coolersw[i].checked){
+                    coolers.push(coolersw[i].value);
+                }
+            }
+            obj.mariales = [{N_material:"Cooler",L_material:coolers}];
+            //fin coolers
+            //visibility
+            var visi = [];
+            var visiw = document.getElementsByName("visibilitys");
+            for(i=0;i<=visiw.length-1;i++){
+                if(visiw[i].checked){
+                    visi.push(visiw[i].value);
+                }
+            }
+            obj.mariales.push({N_material:"Visibility",L_material:visi});
+            //fin visibility
+            //comentario
+            obj.comen = document.getElementById("sample5").value;
+            //fin comentario
+            //caras
+            obj.caras = {redbull:document.getElementsByName("NcarasR")[0].value,otro:document.getElementsByName("NcarasC")[0].value}
+            //fin caras
+            //ID
+            obj.clid = document.getElementsByName("cli_ID")[0].value;
+            obj.fecha = document.getElementsByName("fecha_reg")[0].value;
+            //fin ID
+            $.post("/encuesta",{datos:JSON.stringify(obj)},function(data){
+                console.log(obj);
+                document.location.href = "/"
+            });
+        }
+        function precio(Valor){
+            var inp = document.getElementById("V"+Valor);
+            var che = document.getElementsByName("precios"+Valor);
+            var inpD = document.getElementById("D"+Valor);
+            for(i=0;i<=che.length-1;i++){
+                if(che[i].checked){
+                    if(che[i].value == "-1"){
+                        inpD.style.display = "";
+                    }
+                    else{
+                        inpD.style.display = "none";
+                    }
+                    inp.value = che[i].value;
+                }
+            }
+        };
+        function cambio1(){
+            var che = document.getElementsByName("distribuye");
+            if(che[0].checked)
+            {
+                for(i=1;i<=6;i++){
+                    document.getElementsByClassName("secciones")[i].style.display = "";
+                }  
+            }
+            else{
+                for(i=1;i<=6;i++){
+                    document.getElementsByClassName("secciones")[i].style.display = "none";
+                }
+            }
+        }
+        var flag = true;
+        function distribuye(){
+            var sel = document.getElementById("dis")
+            var input = document.getElementsByName("Distribuidor2")[0];
+            var cont  =document.getElementById("contenedordist");
+            if(sel.value == "otro"){
+                if(flag == true){
+                    input.value = "";
+                    cont.style.display = "";
+                    flag = false;
+                }
+            }
+            else{
+                cont.style.display = "none";
+                input.value = sel.value;
+                flag = true;
+            }
+        }
+    </script>
+</body>
+</html>

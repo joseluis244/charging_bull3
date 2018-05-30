@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script src="https://www.chartjs.org/dist/2.7.2/Chart.bundle.js"></script>
+</head>
+<body>
+	<div class="mdl-layout mdl-js-layout">
+		<main class="mdl-layout__content">
+			<div class="mdl-grid">
+				<div class="mdl-cell mdl-cell--12-col"><h5>Cantidad de Clientes Registrados: 23</h5></div>
+				<div class="mdl-cell mdl-cell--6-col"><h5>Clientes que venden energizantes:20</h5></div>
+				<div class="mdl-cell mdl-cell--6-col"><h5>Clientes que venden redbull:18</h5></div>
+				<div class="mdl-cell mdl-cell--4-col">
+					<canvas id="presenciaxmarca" width="400" height="400"></canvas>
+				</div>
+				<div class="mdl-cell mdl-cell--4-col">
+					<canvas id="preciopromedio" width="400" height="400"></canvas>
+				</div>
+				<div class="mdl-cell mdl-cell--4-col">
+					<canvas id="tiposclientes" width="400" height="400"></canvas>
+				</div>
+				<div class="mdl-cell mdl-cell--4-col">
+					<table class="mdl-data-table mdl-js-data-table" style="width: 100%">
+						<thead>
+							<tr style="background-color: rgb(63,81,181)">
+								<th class="mdl-data-table__cell--non-numeric" style="color: white">Coolers</th>
+								<th style="color: white">Cantidad</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+							<td class="mdl-data-table__cell--non-numeric">Acrylic (Transparent)</td>
+							<td>25</td>
+							</tr>
+							<tr>
+							<td class="mdl-data-table__cell--non-numeric">Plywood (Birch)</td>
+							<td>50</td>
+							</tr>
+							<tr>
+							<td class="mdl-data-table__cell--non-numeric">Laminate (Gold on Blue)</td>
+							<td>10</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="mdl-cell mdl-cell--4-col">
+					<table class="mdl-data-table mdl-js-data-table" style="width: 100%">
+						<thead>
+							<tr style="background-color: rgb(63,81,181)">
+								<th class="mdl-data-table__cell--non-numeric" style="color: white">Visibility</th>
+								<th style="color: white">Cantidad</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+							<td class="mdl-data-table__cell--non-numeric">Acrylic (Transparent)</td>
+							<td>25</td>
+							</tr>
+							<tr>
+							<td class="mdl-data-table__cell--non-numeric">Plywood (Birch)</td>
+							<td>50</td>
+							</tr>
+							<tr>
+							<td class="mdl-data-table__cell--non-numeric">Laminate (Gold on Blue)</td>
+							<td>10</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+		</main>
+	</div>
+	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script>	
+    var MONTHS = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo'];
+	var datos = [3,4,5,7,5]
+		var config1 = {
+			type: 'bar',
+			data: {
+				labels: MONTHS,
+				datasets: [{
+					label: 'precios promedio',
+					backgroundColor: "#d32f2f",
+					borderColor: "#d32f2f",
+					data: datos
+				}]
+			},
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				}
+			}
+		};
+
+		window.onload = function() {
+			var ctx = document.getElementById('presenciaxmarca').getContext('2d');
+			var ctx2 = document.getElementById('preciopromedio').getContext('2d');
+			var ctx3 = document.getElementById('tiposclientes').getContext('2d');
+			window.myLine = new Chart(ctx, config1);
+			window.myLine2 = new Chart(ctx2, config1);
+			window.myLine3 = new Chart(ctx3, config1);
+		};
+
+	
+    </script>
+</body>
+</html>

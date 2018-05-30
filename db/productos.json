@@ -1,0 +1,50 @@
+{ 
+    "_id" : ObjectId("5ad2aeb8ba74f2031de7676a"), 
+    "nombre" : "Red Bull", 
+    "display" : "Red Bull", 
+    "tipo" : "Propio", 
+    "precios" : [
+        15.0, 
+        16.0
+    ]
+}
+{ 
+    "_id" : ObjectId("5ad2b035ba74f2031de7676d"), 
+    "display" : "Rush", 
+    "nombre" : "Rush", 
+    "precios" : [
+        10.0, 
+        12.0
+    ], 
+    "tipo" : "Competencia"
+}
+{ 
+    "_id" : ObjectId("5ad2b035ba74f2031de7676e"), 
+    "display" : "Ciclon 500 ML", 
+    "nombre" : "Ciclon 500 ML", 
+    "precios" : [
+        10.0, 
+        11.0
+    ], 
+    "tipo" : "Competencia"
+}
+{ 
+    "_id" : ObjectId("5ad2b035ba74f2031de7676f"), 
+    "display" : "Black", 
+    "nombre" : "Black", 
+    "precios" : [
+        7.0, 
+        8.0
+    ], 
+    "tipo" : "Competencia"
+}
+{ 
+    "_id" : ObjectId("5ad2b035ba74f2031de76770"), 
+    "display" : "Monster", 
+    "nombre" : "Monster", 
+    "precios" : [
+        16.0, 
+        18.0
+    ], 
+    "tipo" : "Competencia"
+}

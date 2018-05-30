@@ -1,0 +1,10 @@
+{
+    "http":{    
+        "http_puerto":80,
+        "https_puerto":443
+    },
+    "database":{
+        "url":"localhost/",
+        "DB":"RB2"
+    }
+}

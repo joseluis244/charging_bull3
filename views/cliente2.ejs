@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cliente</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+    <link rel="icon" href="img/redbull-icon.png" type="img/gif" sizes="16x16">
+    <style>
+        #fotobull{
+            background-image: url("/img/charging-bull-on-wall.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position-x: center;
+        }
+        #nav2{
+            display: none;
+        }
+        #infoico{
+            display: none;
+        }
+        h6{
+            margin-top: 10px;
+            margin-bottom: 8px;
+        }
+        #datoscli1{
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+    @media screen and (max-width: 480px) {
+        #nav1{
+            display: none;
+        }
+        #datoscli1{
+            display: none;
+        }
+        #contenido{
+            position: absolute;
+            top:15rem;
+        }
+        #nav2{
+            display: block;
+            padding-left: 10px;
+            height: 30px;
+        }
+        #infoico{
+            display: block;
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row" style="padding-left: 20px">
+                <span class="mdl-layout__title"><%= nombre %></span>
+                <div class="mdl-layout-spacer"></div>
+                <div id="infoico"><i class="material-icons" onclick="show()">info</i></div>
+                <nav class="mdl-navigation" id="nav1">
+                    <a class="mdl-navigation__link" href="#datos" onclick="cargarC()">Datos</a>
+                    <a class="mdl-navigation__link" href="#vitacora" onclick="cargarC()">Vitacora</a>
+                </nav>
+            </div>
+        </header>
+        <input type="hidden" value="<%= clid %>" id="clid">
+        <main class="mdl-layout__content" style="height: 100%">
+            <div class="mdl-grid mdl-grid--no-spacing" style="height: 100%">
+                <div class="mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone" style="overflow-y: auto">
+                    <div id="fotobull" style="height: 15rem">
+                    </div>
+                    <div id="datoscli1">
+                        <div>
+                            <h6>ID cliente</h6>
+                            <div><%= id_cli %></div>
+                        </div>
+                        <div>
+                            <div style="display: grid; grid-template-columns: auto 40px">
+                                <div><h6>Direccion</h6></div>
+                                <div style="padding-right: 10px;padding-top: 10px"><i class="material-icons" onclick="go()">location_on</i></div>
+                                <input type="hidden" id="lat" value="<%=GPS[0]%>">
+                                <input type="hidden" id="lng" value="<%=GPS[1]%>">
+                            </div>
+                            <div><%= dir_cli %></div>
+                        </div>
+                        <div>
+                            <h6>Tipos de Cliente</h6>
+                            <div><%= tipo_cli %></div>
+                        </div>
+                        <div>
+                            <h6>Contacto</h6>
+                            <div><%= Cnombre %></div>
+                            <div><%= Ctelefono %></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone" id="contenido" style="overflow-y: auto">
+                    <div>
+                        <div id="nav2" class="mdl-navigation mdl-color--indigo-500">
+                            <a class="mdl-navigation__link mdl-color-text--grey-50" href="#datos" style="margin-right: 80px; font-size: 16px" onclick="cargarC()">Datos</a>
+                            <a class="mdl-navigation__link mdl-color-text--grey-50" href="#vitacora" onclick="cargarC()" style="font-size: 16px">Vitacora</a>
+                        </div>
+                        <div id="contenedordatos" style="display: none">
+                            contenido
+                        </div>
+                        <div style="display: grid; grid-template-columns: auto; justify-content: center; margin-top: 40px;" id="loader">
+                            <div class="mdl-spinner mdl-js-spinner is-active"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-color--red-A700" style="position: fixed; bottom: 10px; right: 10px" onclick="encuesta(`<%= clid %>`)">
+                <i class="material-icons">add</i>
+            </button>
+        </main>
+    </div>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script>
+        inicio()
+        function inicio(){
+            var contenido = document.location.href.split("#")[1];
+            var cargar = document.getElementById("contenedordatos");
+            var loader = document.getElementById("loader");
+            var id = document.getElementById("clid").value;
+            if(!contenido){
+                $.get("/datos/datoscli/"+id,function(data){
+                    cargar.innerHTML = data;
+                    cargar.style.display = "";
+                    loader.style.display = "none";
+                })                
+            }
+            else{
+                var contenido = document.location.href.split("#")[1];
+                switch(contenido){
+                    case "datos":
+                        $.get("/datos/datoscli/"+id,function(data){
+                            cargar.innerHTML = data;
+                            cargar.style.display = "";
+                            loader.style.display = "none";
+                        });
+                        break;
+                    case "vitacora":
+                        $.get("/datos/vitacoracli/"+id,function(data){
+                            cargar.innerHTML = data;
+                            cargar.style.display = "";
+                            loader.style.display = "none";
+                        });
+                        break;
+                }; 
+            }
+        }
+        function encuesta(id){
+            document.location.href = "/encuesta?clid="+id;
+        }
+        function show(){
+            $("#datoscli1").toggle();
+            $("#contenido").toggle();
+        }
+        function go(){
+            var lat = document.getElementById("lat").value;
+            var lng = document.getElementById("lng").value;
+        }
+        function cargarC(){
+            var cargar = document.getElementById("contenedordatos");
+            var id = document.getElementById("clid").value;
+            setTimeout(()=>{
+                var contenido = document.location.href.split("#")[1];
+                switch(contenido){
+                    case "datos":
+                        $.get("/datos/datoscli/"+id,function(data){
+                            cargar.innerHTML = data;
+                        });
+                        break;
+                    case "vitacora":
+                        $.get("/datos/vitacoracli/"+id,function(data){
+                            cargar.innerHTML = data;
+                        });
+                        break;
+                };
+            },2)
+        };
+    </script>
+</body>
+</html>

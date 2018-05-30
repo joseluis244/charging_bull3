@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registro</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <link rel="icon" href="img/redbull-icon.png" type="img/gif" sizes="16x16">
+    <style>
+        #espera{
+            position: fixed;
+            top: 0px;
+            bottom: 0px;
+            right: 0px;
+            left: 0px;
+            background-color: #ffffffd1;
+        }
+    </style>
+</head>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row" style="padding-left: 40px">
+                <span class="mdl-layout__title">Registro de nuevo cliente</span>
+                <div class="mdl-layout-spacer"></div>
+            </div>
+        </header>
+        <main class="mdl-layout__content" style="padding: 10px">
+            <input type="hidden" id="lat">
+            <input type="hidden" id="lng">
+            <div class="mdl-grid mdl-grid--no-spacing">
+                <div class="mdl-cell mdl-cell--12-col"><h5>Datos de cleinte</h5></div>
+                <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-phone mdl-cell--2-col-tablet">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="IDcli">
+                        <label class="mdl-textfield__label" for="IDcli">ID...</label>
+                    </div>
+                </div>
+                <div class="mdl-cell mdl-cell--8-col mdl-cell--4-col-phone mdl-cell--6-col-tablet">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="nombrecli">
+                        <label class="mdl-textfield__label" for="nombrecli">Nombre cleinte...</label>
+                    </div>
+                </div>
+                <!-- ciudad -->
+                <div class="mdl-cell mdl-cell--4-col">
+                    <h5 style="margin: 0px">Ciudad</h5><br>
+                    <select name="ciudad" id="ciudad">
+                        <option value="Santa Cruz">Santa Cruz</option>
+                        <option value="La Paz">La Paz</option>
+                        <option value="Cochabamba">Cochabamba</option>
+                        <option value="Beni">Beni</option>
+                        <option value="Oruro">Oruro</option>
+                        <option value="Chuquisaca">Chuquisaca</option>
+                        <option value="Potosi">Potosi</option>
+                        <option value="Tarija">Tarija</option>
+                        <option value="Pando">Pando</option>
+                    </select>
+                </div>
+                <!--fin ciudad-->
+                <div class="mdl-cell mdl-cell--8-col">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input class="mdl-textfield__input" type="text" id="direccion">
+                        <label class="mdl-textfield__label" for="direccion">Direccion...</label>
+                    </div>
+                </div>
+
+                <div class="mdl-cell mdl-cell--12-col">
+                    <h5>Tipo de cliente</h5>
+                </div>
+                <div class="mdl-cell mdl-cell--12-col">
+                    <select name="tipo" id="tipo">
+                        <% for(i=0;i<=tipos.length-1;i++){ %>
+                        <option value="<%= tipos[i].tipo %>"><%=tipos[i].tipo%></option>
+                        <% }%>
+                    </select>
+                </div>
+                <div class="mdl-cell mdl-cell--12-col">
+                    <h5>Contacto</h5>
+                </div>
+                <div class="mdl-cell mdl-cell--12-col">
+                    <div class="mdl-grid mdl-grid--no-spacing">
+                        <div class="mdl-cell mdl-cell--4-col">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" id="nombredato">
+                                <label class="mdl-textfield__label" for="nombredato">Nombre contacto...</label>
+                            </div>
+                        </div>
+                        <div class="mdl-cell mdl-cell--4-col">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="datocontacto">
+                                <label class="mdl-textfield__label" for="datocontacto">Numero contacto...</label>
+                                <span class="mdl-textfield__error">Input is not a number!</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: right">
+                <button class="mdl-button mdl-js-button mdl-button--primary" onclick="vermapa()" id="vermapa">
+                    Ver mapa
+                </button>
+            </div>
+            <div style="width: 100%; height: 500px; display: none" id="mapaCont">
+                <div id="mapa" style="width: 100%;height: 100%">mapa</div>
+            </div>
+            <div class="mdl-grid">
+                <div class="mdl-cell mdl-cell--3-col">
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="registrar()">
+                        Registrar
+                    </button>
+                </div>
+                <div class="mdl-cell mdl-cell--4-col">
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="registrarenc()">
+                        Registrar y encuestar
+                    </button>
+                </div>
+            </div>
+            <div id="espera">
+                <div style="display: grid;width: 100%;height: 100%;grid-template-columns: auto;align-content: center;justify-content: center">
+                    <div style="text-align: center"><div class="mdl-spinner mdl-js-spinner is-active"></div></div>
+                    <div id="loadmessage"><h5>Obteniendo Ubicancion</h5></div>    
+                </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script>
+        function cargardatos(){
+            var datos = {
+                id:document.getElementById("IDcli").value,
+                nombre:document.getElementById("nombrecli").value,
+                ciudad:document.getElementsByName("ciudad")[0].value,
+                direccion:document.getElementById("direccion").value,
+                lat:document.getElementById("lat").value,
+                lng:document.getElementById("lng").value,
+                tipo:document.getElementsByName("tipo")[0].value,
+                contacto_N:document.getElementById("nombredato").value,
+                contacto_D:document.getElementById("datocontacto").value
+            }
+            console.log(datos);
+            
+            return datos;
+        };
+        function registrar(){
+            document.getElementById("loadmessage").innerHTML = "<h5>Registrando cliente</h5>";
+            document.getElementById("espera").style.display = "";
+            var datos = cargardatos();
+            $.post("/registrar",datos,function(data){
+                document.location.href = data;
+            });
+        };
+
+        function registrarenc(){
+            document.getElementById("loadmessage").innerHTML = "<h5>Registrando cliente</h5>";
+            document.getElementById("espera").style.display = "";
+            var datos = cargardatos();
+            $.post("/registrar2",datos,function(data){
+                document.location.href = data;
+            });
+        };
+
+
+
+        function vermapa(){
+            var boton = document.getElementById("vermapa");
+            var mapa = document.getElementById("mapaCont");
+            if(mapa.style.display == "none"){
+                boton.innerHTML = "Ocultar mapa";
+                mapa.style.display = "";
+            }
+            else{
+                boton.innerHTML = "Ver mapa";
+                mapa.style.display = "none";
+            }
+        };
+        function showError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    document.getElementById("loadmessage").innerHTML = "<h5>Los permisos GPS son requeridos</h5>"
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    console.log("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    console.log("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    console.log("An unknown error occurred.");
+                    break;
+            }
+        }
+//maps
+        function initMap(){
+            var map = new google.maps.Map(document.getElementById('mapa'), {
+                zoom: 12
+            });
+            var maker = new google.maps.Marker({
+                map: map
+            });
+            navigator.geolocation.getCurrentPosition(showPosition,showError);
+            function showPosition(position){
+                document.getElementById("lat").value = position.coords.latitude;
+                document.getElementById("lng").value = position.coords.longitude;
+                var geo = {lat:position.coords.latitude, lng:position.coords.longitude}
+                maker.setPosition(geo)
+                map.setCenter(geo)   
+                document.getElementById("espera").style.display = "none";
+            }
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOfoCLTTmvfANgGf06S8H-4VfqfLVxo70&callback=initMap"async defer></script>
+</body>
+</html>

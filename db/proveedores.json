@@ -1,0 +1,30 @@
+{ 
+    "_id" : ObjectId("5ad2a5a8ba74f2031de76733"), 
+    "display" : "D&M", 
+    "nombre" : "D&M"
+}
+{ 
+    "_id" : ObjectId("5ad2a75fba74f2031de76759"), 
+    "display" : "Promabol", 
+    "nombre" : "Promabol"
+}
+{ 
+    "_id" : ObjectId("5ad2a75fba74f2031de7675a"), 
+    "display" : "Dhotar", 
+    "nombre" : "Dhotar"
+}
+{ 
+    "_id" : ObjectId("5ad2a75fba74f2031de7675b"), 
+    "display" : "Delizia", 
+    "nombre" : "Delizia"
+}
+{ 
+    "_id" : ObjectId("5ad2a75fba74f2031de7675c"), 
+    "display" : "Etix Distribuidora", 
+    "nombre" : "Etix Distribuidora"
+}
+{ 
+    "_id" : ObjectId("5ad2a75fba74f2031de7675d"), 
+    "display" : "Distribuidora Flores", 
+    "nombre" : "Distribuidora Flores"
+}

@@ -1,0 +1,131 @@
+<body>
+	<div class="mdl-layout mdl-js-layout">
+		<main class="mdl-layout__content">
+			<div class="mdl-grid">
+				<div class="mdl-cell mdl-cell--12-col"><h5>Cantidad de Clientes Registrados: <%= cantidad.total %></h5></div>
+				<div class="mdl-cell mdl-cell--6-col"><h5>Clientes que venden energizantes: <%= cantidad.vende %></h5></div>
+				<div class="mdl-cell mdl-cell--6-col"><h5>Clientes que venden Red Bull: <%= cantidad.RB %></h5></div>
+				<div class="mdl-cell mdl-cell--4-col">
+					<canvas id="preciopromedio" width="400" height="400"></canvas>
+				</div>
+				<div class="mdl-cell mdl-cell--4-col">
+					<canvas id="presenciaxmarca" width="400" height="400"></canvas>
+				</div>
+				<div class="mdl-cell mdl-cell--4-col">
+					<canvas id="tiposclientes" width="400" height="400"></canvas>
+				</div>
+				<div class="mdl-cell mdl-cell--4-col">
+					<table class="mdl-data-table mdl-js-data-table" style="width: 100%">
+						<thead>
+							<tr style="background-color: #3f51b5">
+								<th class="mdl-data-table__cell--non-numeric" style="color: white">Coolers</th>
+								<th style="color: white">Cantidad</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% for(i=0;i<=materiales.NC.length-1;i++){ %>
+							<tr>
+							<td class="mdl-data-table__cell--non-numeric"><%= materiales.NC[i] %></td>
+							<td><%= materiales.CC[i] %></td>
+							</tr>
+							<% } %>
+						</tbody>
+					</table>
+				</div>
+				<div class="mdl-cell mdl-cell--4-col">
+					<table class="mdl-data-table mdl-js-data-table" style="width: 100%">
+						<thead>
+							<tr style="background-color: #3f51b5">
+								<th class="mdl-data-table__cell--non-numeric" style="color: white">Visibility</th>
+								<th style="color: white">Cantidad</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% for(i=0;i<=materiales.NV.length-1;i++){ %>
+							<tr>
+							<td class="mdl-data-table__cell--non-numeric"><%= materiales.NV[i] %></td>
+							<td><%= materiales.CV[i] %></td>
+							</tr>
+							<% } %>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+		</main>
+	</div>
+	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+	<script>	
+	var lab01 = "<%= bebidas %>";
+	var lab1 = lab01.split(",");
+	var datos01 = "<%= Bprecio %>";
+	var datos1 = datos01.split(",");
+
+	var datos02 =  "<%= Bcant %>";
+	var datos2 = datos02.split(",");
+	var lab3 = "<%= Tcli.nombres %>".split(",");
+	var datos3 = "<%= Tcli.cantidades %>".split(",");
+
+		var config1 = {
+			type: 'bar',
+			data: {
+				labels: lab1,
+				datasets: [{
+					label: 'precios promedio (Bs.)',
+					backgroundColor: "#d32f2f",
+					borderColor: "#d32f2f",
+					data: datos1
+				}]
+			},
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				}
+			}
+		};
+		var config2 = {
+			type: 'bar',
+			data: {
+				labels: lab1,
+				datasets: [{
+					label: 'precencia(# cleintes)',
+					backgroundColor: "#d32f2f",
+					borderColor: "#d32f2f",
+					data: datos2
+				}]
+			},
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				}
+			}
+		};
+		var config3 = {
+			type: 'doughnut',
+			data: {
+				labels: lab3,
+				datasets: [{
+					label: 'Tipos de Clientes',
+					backgroundColor: ["#d32f2f","#303f9f","#FFC107","#607D8B","#4CAF50","#00BCD4","#009688","#673AB7"],
+					data: datos3
+				}]
+			}
+		};
+			var ctx = document.getElementById('preciopromedio').getContext('2d');
+			var ctx2 = document.getElementById('presenciaxmarca').getContext('2d');
+			var ctx3 = document.getElementById('tiposclientes').getContext('2d');
+			window.myLine = new Chart(ctx, config1);
+			window.myLine2 = new Chart(ctx2, config2);
+			window.myLine3 = new Chart(ctx3, config3);
+
+	
+    </script>
+</body>

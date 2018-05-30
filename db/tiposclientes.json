@@ -1,0 +1,32 @@
+{ 
+    "_id" : ObjectId("5ad21b67ba74f2031de766e5"), 
+    "tipo" : "Licoreria"
+}
+{ 
+    "_id" : ObjectId("5ad21b67ba74f2031de766e6"), 
+    "tipo" : "Micromercado"
+}
+{ 
+    "_id" : ObjectId("5ad21b67ba74f2031de766e7"), 
+    "tipo" : "Tienda de Bariio"
+}
+{ 
+    "_id" : ObjectId("5ad21b67ba74f2031de766e8"), 
+    "tipo" : "Kiosko"
+}
+{ 
+    "_id" : ObjectId("5ad21b67ba74f2031de766e9"), 
+    "tipo" : "Famacia"
+}
+{ 
+    "_id" : ObjectId("5ad21b67ba74f2031de766ea"), 
+    "tipo" : "Otro Impulso"
+}
+{ 
+    "_id" : ObjectId("5ad21b67ba74f2031de766eb"), 
+    "tipo" : "Mayorista"
+}
+{ 
+    "_id" : ObjectId("5ad21b67ba74f2031de766ec"), 
+    "tipo" : "Minorista"
+}

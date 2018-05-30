@@ -27,7 +27,7 @@ app.set('view engine', 'ejs');
 //use
 //app.use(favicon("/img/redbull-icon.png"));
 //app.use(forcessl);
-app.use(express.static("html"));
+//app.use(express.static("html"));
 app.use("/cluster",express.static("cluster"));
 app.use("/node_modules",express.static("node_modules"));
 app.use(cookieParser());

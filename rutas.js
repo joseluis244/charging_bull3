@@ -37,7 +37,7 @@ module.exports = function(app, passport){
     });
     app.get("/listas/:lista",function(req,res){
         var lista = req.params.lista;
-        cliente.find({},function(err,clientes){
+        cliente.find({},null,{limit:30,sort:{_id:-1}},function(err,clientes){
             res.render(lista+".ejs",{cliente:clientes})
         });
     });

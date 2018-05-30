@@ -1,6 +1,6 @@
 {
     "http":{    
-        "http_puerto":80,
+        "http_puerto":3000,
         "https_puerto":443
     },
     "database":{

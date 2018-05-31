@@ -19,7 +19,7 @@ module.exports = function(app, passport){
     });
     app.get("/registrar",isLoggedIn,function(req,res){
         tipo.find({},function(err,tipos){
-            res.render("registro.ejs",{tipos:tipos})
+            res.render("registro2.ejs",{tipos:tipos})
         });
     });
     app.get("/encuesta",isLoggedIn,function(req,res){

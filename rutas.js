@@ -17,7 +17,7 @@ module.exports = function(app, passport){
     app.get("/main",isLoggedIn,function(req,res){
         res.render("main.ejs",{nombre:req.user.nombre,tipo:req.user.tipo});
     });
-    app.get("/registrar",isLoggedIn,function(req,res){
+    app.get("/registrar",/*isLoggedIn,*/function(req,res){
         tipo.find({},function(err,tipos){
             res.render("registro2.ejs",{tipos:tipos})
         });

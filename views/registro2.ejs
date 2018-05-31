@@ -189,7 +189,8 @@
                 document.getElementById("lng").value = position.coords.longitude;
                 map.setCenter({lat:position.coords.latitude,lng:position.coords.longitude})
                 maker.setPosition({lat:position.coords.latitude,lng:position.coords.longitude})
-                document.getElementById("estado").style.display = "none";
+                document.getElementById("icono1").style.display = "none";
+                document.getElementById("mensaje1").innerHTML = "Poscion GPS guardada";
                 habilitarbotones();
             }
             function showError(error){

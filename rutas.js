@@ -28,6 +28,12 @@ module.exports = function(app, passport){
             res.render("encuesta.ejs",{nombrecli:cliente.cli_nombre,cli_id:cliente.cli_id,clitipo:cliente.tipo,distribuidores:datos.prov,bebida:datos.prod,cooler:datos.mat[0].lista,visibility:datos.mat[1].lista})
         })
     });
+    app.get("/corregir",isLoggedIn,function(req,res){
+        res.redirect("/main");
+    });
+    app.get("/corregire",isLoggedIn,function(req,res){
+        res.redirect("/main");
+    });
     app.get("/login",function(req,res){
         res.sendfile("./html/login.html")
     });

@@ -209,6 +209,20 @@
                             document.getElementById("lng").value = event.latLng.lng();
                         });
                         break;
+                    case 2:
+                        document.getElementById("espera").style.display = "grid";
+                        document.getElementById("mens2").style.display = "";
+                        document.getElementById("estado").style.display = "none";
+                        document.getElementById("mapaCont").style.display = "";
+                        map.setCenter({ lat: -16.7555336, lng: -63.3158374 });
+                        map.setZoom(6);
+                        habilitarbotones();
+                        google.maps.event.addListener(map, 'click', function (event) {
+                            maker.setPosition(event.latLng)
+                            document.getElementById("lat").value = event.latLng.lat();
+                            document.getElementById("lng").value = event.latLng.lng();
+                        });
+                        break;
                     case 3:
                         document.getElementById("mens2").style.display = "";
                         document.getElementById("estado").style.display = "none";
@@ -221,6 +235,9 @@
                             document.getElementById("lat").value = event.latLng.lat();
                             document.getElementById("lng").value = event.latLng.lng();
                         });
+                        break;
+                    case 4:
+                        alert("Error desconocido")
                         break;
                 }
             }
@@ -235,17 +252,65 @@
                 document.getElementById("bt1").disabled = false;
                 document.getElementById("bt2").disabled = false;
             }
+        function deshabilitarbotones() {
+                document.getElementById("bt1").disabled = true;
+                document.getElementById("bt2").disabled = true;
+            }
         function asignacionmanual() {
                 document.getElementById("espera").style.display = "none";
             }
         function registrar(){
             if(validar()){
                 console.log("datos validados");
-                document.getElementById("estado").style.display = "";
+                deshabilitarbotones();
+                document.getElementById("icono1").style.display = "";
                 document.getElementById("mensaje1").innerHTML = "Guardando los datos en el servidor";
+
+                $.post("/registrar", {
+                    id:document.getElementById("IDcli").value,
+                    nombre:document.getElementById("nombrecli").value,
+                    ciudad:document.getElementById("ciudad").value,
+                    direccion:document.getElementById("direccion").value,
+                    lat:document.getElementById("lat").value,
+                    lng:document.getElementById("lng").value,
+                    tipo:document.getElementById("tipo").value,
+                    contacto_N:document.getElementById("nombredato").value,
+                    contacto_D:document.getElementById("datocontacto").value
+                    }, function (data,status) {
+                        location.href = "/main";
+                    });
                 setTimeout(function(){
                     console.log("tiempo de respuesta agotado")
-                    location.href = "google.com"
+                    location.href = "/main";
+                },10000)
+            }
+            else{
+                console.log("datos no validos")
+            }
+        }
+        function registrarenc(){
+            if(validar()){
+                console.log("datos validados");
+                deshabilitarbotones();
+                document.getElementById("icono1").style.display = "";
+                document.getElementById("mensaje1").innerHTML = "Guardando los datos en el servidor";
+
+                $.post("/registrar2", {
+                    id:document.getElementById("IDcli").value,
+                    nombre:document.getElementById("nombrecli").value,
+                    ciudad:document.getElementById("ciudad").value,
+                    direccion:document.getElementById("direccion").value,
+                    lat:document.getElementById("lat").value,
+                    lng:document.getElementById("lng").value,
+                    tipo:document.getElementById("tipo").value,
+                    contacto_N:document.getElementById("nombredato").value,
+                    contacto_D:document.getElementById("datocontacto").value
+                    }, function (data,status) {
+                        location.href = data;
+                    });
+                setTimeout(function(){
+                    console.log("tiempo de respuesta agotado")
+                    location.href = "/main"
                 },10000)
             }
             else{

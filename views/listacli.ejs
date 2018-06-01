@@ -1,4 +1,5 @@
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
             <style>
             .mdl-list__item-sub-title{
                 white-space: nowrap;
@@ -17,8 +18,7 @@
                     </div>
                 </div>
             <div class="mdl-grid mdl-grid--no-spacing">
-                <div class="mdl-cell--1-col-desktop mdl-cell--hide-tablet"></div>
-                <div class="mdl-cell--10-col-desktop mdl-cell--8-col-tablet mdl-cell--4-col-phone" style="padding: 5px;">
+                <div class="mdl-cell--12-col" style="padding: 5px;">
                     <ul class="mdl-list">
 
                         <% for(i=0;i<=cliente.length-1;i++){ %>
@@ -32,14 +32,15 @@
                                     var iconoo = "store";
                              }
                             %>
-                        <li class="mdl-list__item mdl-list__item--two-line" onclick="ira(`?cli=<%= cliente[i]._id %>`)">                            
-                            <div class="icono">
-                                <i class="material-icons" style="font-size: 3rem"><%= iconoo %></i>
-                            </div>
-                            <span class="mdl-list__item-primary-content">    
-                                <span><%= cliente[i].nombre %></span>
+                        <li class="mdl-list__item mdl-list__item--two-line">                            
+                            <span class="mdl-list__item-primary-content" onclick="ira(`?cli=<%= cliente[i]._id %>`)">    
+                                <span style="font-weight: bold"><%= cliente[i].nombre %></span>
                                 <span class="mdl-list__item-sub-title"><%= cliente[i].direccion %></span>
                             </span>
+                            <div style="display: grid; grid-template-columns: auto auto">
+                                <div style="margin-right: 10px" onclick="corregird(`?cli=<%= cliente[i]._id %>`)"><i class="material-icons">edit</i></div>
+                                <div style="margin-left: 10px; padding-right: 10px" onclick="corregire(`?cli=<%= cliente[i]._id %>`)"><i class="material-icons">description</i></div>
+                            </div>
                         </li>
                         <% } %>
 
@@ -52,6 +53,12 @@
             <script>
             function ira(cod){
                 window.location.href = "cliente"+cod
+            }
+            function corregird(id){
+                location.href = "corregir"+id
+            }
+            function corregire(id){
+                location.href = "corregire"+id
             }
             function buscar(){
                 var li = document.getElementsByTagName("li");
@@ -69,3 +76,4 @@
                 }
             }
             </script>
+                <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>

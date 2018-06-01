@@ -28,11 +28,16 @@ module.exports = function(app, passport){
             res.render("encuesta.ejs",{nombrecli:cliente.cli_nombre,cli_id:cliente.cli_id,clitipo:cliente.tipo,distribuidores:datos.prov,bebida:datos.prod,cooler:datos.mat[0].lista,visibility:datos.mat[1].lista})
         })
     });
-    app.get("/corregir",isLoggedIn,function(req,res){
-        res.redirect("/main");
+    app.get("/corregir",/*isLoggedIn,*/function(req,res){
+        cliente.findById(req.param("cli"),function(err,cli){
+            res.render("registro2correccion.ejs",{cli:cli});
+            //console.log(cli)   
+        })
     });
-    app.get("/corregire",isLoggedIn,function(req,res){
-        res.redirect("/main");
+    app.get("/corregire",/*isLoggedIn,*/function(req,res){
+        cliente.findById(req.param("cli"),function(err,cli){
+            res.render("encuestacorregir.ejs",{cli:cli});
+        })
     });
     app.get("/login",function(req,res){
         res.sendfile("./html/login.html")
@@ -129,6 +134,24 @@ module.exports = function(app, passport){
         })
     })
     //POST
+
+    app.post("/corregir",function(req,res){
+        registro={
+            cli_id:req.body.id,
+            nombre:req.body.nombre,
+            ciudad:req.body.ciudad,
+            direccion:req.body.direccion,
+            tipo:req.body.tipo,
+            contacto:[{
+                C_nombre:req.body.contacto_N,
+                C_dato:req.body.contacto_D
+            }]
+        }
+        console.log(registro)
+        cliente.update({_id:req.body.IDd},{$set:registro},function(){});
+        res.send(true);
+    });
+
     app.post("/encuesta",function(req,res){
         var data = JSON.parse(req.body.datos);
         cliente.update({_id:data.clid},{$set:{

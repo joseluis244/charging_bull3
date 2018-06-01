@@ -1,0 +1,225 @@
+<div class="secciones">
+                <h5 class="subtitulo">Precios(Bs.)</h5>
+                <div class="seccion seccion3 mdl-grid">
+                    
+                        <div class="mdl-cell mdl-cell--4-col">
+                            <!-- precio -->
+                            <div style="display: grid; grid-template-columns: 120px auto">
+                                <div style="display: grid; align-content: center">
+                                    <div name="nombreB">Red Bull</div>
+                                </div>
+                                <div onchange="precio('0');">
+                                    <!-- valor -->
+                                    <div>
+                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="0P0">
+                                            <input type="radio" id="0P0" class="mdl-radio__button" name="precios0" value="0" checked>
+                                            <span class="mdl-radio__label">No vende</span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="0P1">
+                                            <input type="radio" id="0P1" class="mdl-radio__button" name="precios0" value="15">
+                                            <span class="mdl-radio__label">15</span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="0P2">
+                                            <input type="radio" id="0P2" class="mdl-radio__button" name="precios0" value="16">
+                                            <span class="mdl-radio__label">16</span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="0P3">
+                                            <input type="radio" id="0P3" class="mdl-radio__button" name="precios0" value="-1">
+                                            <span class="mdl-radio__label">otro</span>
+                                        </label>
+                                    </div>
+                                    <!-- fin valor -->
+                                </div>
+                                <div style="grid-column: 1/3; display: none" id="D0">
+                                    <input type="text" name="preciosB" id="V0" value="0">
+                                </div>
+                            </div>
+                            <!-- finprecio -->
+                        </div>
+                        
+                        <div class="mdl-cell mdl-cell--4-col">
+                            <!-- precio -->
+                            <div style="display: grid; grid-template-columns: 120px auto">
+                                <div style="display: grid; align-content: center">
+                                    <div name="nombreB">Rush</div>
+                                </div>
+                                <div onchange="precio('1');">
+                                    <!-- valor -->
+                                    <div>
+                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="1P0">
+                                            <input type="radio" id="1P0" class="mdl-radio__button" name="precios1" value="0" checked>
+                                            <span class="mdl-radio__label">No vende</span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="1P1">
+                                            <input type="radio" id="1P1" class="mdl-radio__button" name="precios1" value="10">
+                                            <span class="mdl-radio__label">10</span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="1P2">
+                                            <input type="radio" id="1P2" class="mdl-radio__button" name="precios1" value="12">
+                                            <span class="mdl-radio__label">12</span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="1P3">
+                                            <input type="radio" id="1P3" class="mdl-radio__button" name="precios1" value="-1">
+                                            <span class="mdl-radio__label">otro</span>
+                                        </label>
+                                    </div>
+                                    <!-- fin valor -->
+                                </div>
+                                <div style="grid-column: 1/3; display: none" id="D1">
+                                    <input type="text" name="preciosB" id="V1" value="0">
+                                </div>
+                            </div>
+                            <!-- finprecio -->
+                        </div>
+                        
+                        <div class="mdl-cell mdl-cell--4-col">
+                            <!-- precio -->
+                            <div style="display: grid; grid-template-columns: 120px auto">
+                                <div style="display: grid; align-content: center">
+                                    <div name="nombreB">Ciclon 500 ML</div>
+                                </div>
+                                <div onchange="precio('2');">
+                                    <!-- valor -->
+                                    <div>
+                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="2P0">
+                                            <input type="radio" id="2P0" class="mdl-radio__button" name="precios2" value="0" checked>
+                                            <span class="mdl-radio__label">No vende</span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="2P1">
+                                            <input type="radio" id="2P1" class="mdl-radio__button" name="precios2" value="10">
+                                            <span class="mdl-radio__label">10</span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="2P2">
+                                            <input type="radio" id="2P2" class="mdl-radio__button" name="precios2" value="11">
+                                            <span class="mdl-radio__label">11</span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="2P3">
+                                            <input type="radio" id="2P3" class="mdl-radio__button" name="precios2" value="-1">
+                                            <span class="mdl-radio__label">otro</span>
+                                        </label>
+                                    </div>
+                                    <!-- fin valor -->
+                                </div>
+                                <div style="grid-column: 1/3; display: none" id="D2">
+                                    <input type="text" name="preciosB" id="V2" value="0">
+                                </div>
+                            </div>
+                            <!-- finprecio -->
+                        </div>
+                        
+                        <div class="mdl-cell mdl-cell--4-col">
+                            <!-- precio -->
+                            <div style="display: grid; grid-template-columns: 120px auto">
+                                <div style="display: grid; align-content: center">
+                                    <div name="nombreB">Black</div>
+                                </div>
+                                <div onchange="precio('3');">
+                                    <!-- valor -->
+                                    <div>
+                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="3P0">
+                                            <input type="radio" id="3P0" class="mdl-radio__button" name="precios3" value="0" checked>
+                                            <span class="mdl-radio__label">No vende</span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="3P1">
+                                            <input type="radio" id="3P1" class="mdl-radio__button" name="precios3" value="7">
+                                            <span class="mdl-radio__label">7</span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="3P2">
+                                            <input type="radio" id="3P2" class="mdl-radio__button" name="precios3" value="8">
+                                            <span class="mdl-radio__label">8</span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="3P3">
+                                            <input type="radio" id="3P3" class="mdl-radio__button" name="precios3" value="-1">
+                                            <span class="mdl-radio__label">otro</span>
+                                        </label>
+                                    </div>
+                                    <!-- fin valor -->
+                                </div>
+                                <div style="grid-column: 1/3; display: none" id="D3">
+                                    <input type="text" name="preciosB" id="V3" value="0">
+                                </div>
+                            </div>
+                            <!-- finprecio -->
+                        </div>
+                        
+                        <div class="mdl-cell mdl-cell--4-col">
+                            <!-- precio -->
+                            <div style="display: grid; grid-template-columns: 120px auto">
+                                <div style="display: grid; align-content: center">
+                                    <div name="nombreB">Monster</div>
+                                </div>
+                                <div onchange="precio('4');">
+                                    <!-- valor -->
+                                    <div>
+                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="4P0">
+                                            <input type="radio" id="4P0" class="mdl-radio__button" name="precios4" value="0" checked>
+                                            <span class="mdl-radio__label">No vende</span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="4P1">
+                                            <input type="radio" id="4P1" class="mdl-radio__button" name="precios4" value="16">
+                                            <span class="mdl-radio__label">16</span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="4P2">
+                                            <input type="radio" id="4P2" class="mdl-radio__button" name="precios4" value="18">
+                                            <span class="mdl-radio__label">18</span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="4P3">
+                                            <input type="radio" id="4P3" class="mdl-radio__button" name="precios4" value="-1">
+                                            <span class="mdl-radio__label">otro</span>
+                                        </label>
+                                    </div>
+                                    <!-- fin valor -->
+                                </div>
+                                <div style="grid-column: 1/3; display: none" id="D4">
+                                    <input type="text" name="preciosB" id="V4" value="0">
+                                </div>
+                            </div>
+                            <!-- finprecio -->
+                        </div>
+                    </div>
+            </div>

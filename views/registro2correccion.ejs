@@ -28,13 +28,13 @@
                 </div>
                 <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-phone mdl-cell--2-col-tablet">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="IDcli" value="ID del cliente">
+                        <input class="mdl-textfield__input" type="text" id="IDcli" value="<%=cli.cli_id%>">
                         <label class="mdl-textfield__label" for="IDcli">ID...</label>
                     </div>
                 </div>
                 <div class="mdl-cell mdl-cell--8-col mdl-cell--4-col-phone mdl-cell--6-col-tablet">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="nombrecli" value="nombre">
+                        <input class="mdl-textfield__input" type="text" id="nombrecli" value="<%=cli.nombre%>">
                         <label class="mdl-textfield__label" for="nombrecli">Nombre cleinte...</label>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                 <!--fin ciudad-->
                 <div class="mdl-cell mdl-cell--8-col">
                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                        <input class="mdl-textfield__input" type="text" id="direccion" value="direccion">
+                        <input class="mdl-textfield__input" type="text" id="direccion" value="<%=cli.direccion%>">
                         <label class="mdl-textfield__label" for="direccion">Direccion...</label>
                     </div>
                 </div>
@@ -67,12 +67,15 @@
                 </div>
                 <div class="mdl-cell mdl-cell--12-col">
                     <select name="tipo" id="tipo">
-                        <% for(i=0;i<=tipos.length-1;i++){ %>
-                            <option value="<%= tipos[i].tipo %>">
-                                <%=tipos[i].tipo%>
-                            </option>
-                            <% }%>
-                    </select>
+                        <option value="Licoreria">Licoreria</option>
+                        <option value="Micromercado">Micromercado</option>
+                        <option value="Tienda de Bariio">Tienda de Bariio</option>
+                        <option value="Kiosko">Kiosko</option>
+                        <option value="Famacia">Famacia</option>
+                        <option value="Otro Impulso">Otro Impulso</option>
+                        <option value="Mayorista">Mayorista</option>
+                        <option value="Minorista">Minorista</option>
+                </select>
                 </div>
                 <div class="mdl-cell mdl-cell--12-col">
                     <h5>Contacto</h5>
@@ -81,13 +84,13 @@
                     <div class="mdl-grid mdl-grid--no-spacing">
                         <div class="mdl-cell mdl-cell--4-col">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="text" id="nombredato" value="contacto">
+                                <input class="mdl-textfield__input" type="text" id="nombredato" value="<%=cli.contacto[0].C_nombre%>">
                                 <label class="mdl-textfield__label" for="nombredato">Nombre contacto...</label>
                             </div>
                         </div>
                         <div class="mdl-cell mdl-cell--4-col">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                                <input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="datocontacto" value="123123">
+                                <input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="datocontacto" value="<%=cli.contacto[0].C_dato%>">
                                 <label class="mdl-textfield__label" for="datocontacto">Numero contacto...</label>
                                 <span class="mdl-textfield__error">Input is not a number!</span>
                             </div>
@@ -98,8 +101,8 @@
 
             <div class="mdl-grid">
                 <div class="mdl-cell mdl-cell--3-col">
-                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="registrar()" id="bt1" disabled>
-                        Registrar
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="corregir()" id="bt1">
+                        Corregir
                     </button>
                 </div>
             </div>
@@ -111,37 +114,39 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
     <script>
-        habilitarbotones();
+        $("#ciudad").val("<%= cli.ciudad %>")
+        $("#tipo").val("<%= cli.tipo %>")
         function validar() {
                 if ($("#nombrecli").val() == "" || $("#direccion").val() == "") {
                     alert("faltan datos");
                     return false;
                 }
                 else {
-                    if (document.getElementById("lat").value == "" || document.getElementById("lng").value == "") {
-                        alert("posicion GPS no asignada");
-                        return false;
-                    }
-                    else {
-                        return true;
-                    }
+                    return true;
                 }
-            }
-        function habilitarbotones() {
-                document.getElementById("bt1").disabled = false;
-                document.getElementById("bt2").disabled = false;
             }
         function asignacionmanual() {
                 document.getElementById("espera").style.display = "none";
             }
-        function registrar() {
+        function corregir() {
                 if (validar()) {
                     console.log("datos validados");
-                    document.getElementById("estado").style.display = "";
-                    document.getElementById("mensaje1").innerHTML = "Guardando los datos en el servidor";
+                    $.post("/corregir",{
+                        IDd:"<%= cli._id %>",
+                        id:document.getElementById("IDcli").value,
+                        nombre:document.getElementById("nombrecli").value,
+                        ciudad:document.getElementById("ciudad").value,
+                        direccion:document.getElementById("direccion").value,
+                        tipo:document.getElementById("tipo").value,
+                        contacto_N:document.getElementById("nombredato").value,
+                        contacto_D:document.getElementById("datocontacto").value
+                    },function(data) {
+                        location.href = "/main"
+                    })
+
                     setTimeout(function () {
                         console.log("tiempo de respuesta agotado")
-                        location.href = "google.com"
+                        location.href = "/main"
                     }, 10000)
                 }
                 else {
@@ -149,8 +154,6 @@
                 }
             }
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOfoCLTTmvfANgGf06S8H-4VfqfLVxo70&callback=initMap" async
-        defer></script>
 </body>
 
 </html>

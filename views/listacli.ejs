@@ -35,7 +35,7 @@
                         <li class="mdl-list__item mdl-list__item--two-line">                            
                             <span class="mdl-list__item-primary-content" onclick="ira(`?cli=<%= cliente[i]._id %>`)">    
                                 <span style="font-weight: bold"><%= cliente[i].nombre %></span>
-                                <span class="mdl-list__item-sub-title"><%= cliente[i].direccion %></span>
+                                <span class="mdl-list__item-sub-title" style="max-width: 400px;"><%= cliente[i].direccion %></span>
                             </span>
                             <div style="display: grid; grid-template-columns: auto auto">
                                 <div style="margin-right: 10px" onclick="corregird(`?cli=<%= cliente[i]._id %>`)"><i class="material-icons">edit</i></div>

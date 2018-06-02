@@ -147,8 +147,23 @@ module.exports = function(app, passport){
                 C_dato:req.body.contacto_D
             }]
         }
-        console.log(registro)
+        //console.log(registro)
         cliente.update({_id:req.body.IDd},{$set:registro},function(){});
+        res.send(true);
+    });
+
+    app.post("/corregire",function(req,res){
+        var data = JSON.parse(req.body.datos)
+        registro={
+            distribuye:data.vende,
+            distribuidor:data.distribuidor,
+            materiales:data.mariales,
+            share:data.caras,
+            comentario:data.comen
+        }
+        console.log(registro)
+        //console.log(registro)
+        cliente.update({_id:data.clid},{$set:registro},function(){});
         res.send(true);
     });
 

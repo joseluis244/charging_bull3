@@ -40,7 +40,7 @@
             </div>
         </header>
         <main class="mdl-layout__content" style="padding: 5px">
-            <input type="hidden" value="<%= cli.cli_id %>" name="cli_ID">
+            <input type="hidden" value="<%= cli._id %>" name="cli_ID">
             <input type="hidden" value="20180412" name="fecha_reg" id="fecha_reg2">
             <!--secciones-->
             <div class="secciones">
@@ -325,7 +325,7 @@
             <div class="mdl-grid">
                 <div class="mdl-cell mdl-cell--4-col">
                     <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="guardar()">
-                        Guardar
+                        Corregir
                     </button>
                 </div>
             </div>
@@ -383,13 +383,13 @@
             obj.distribuidor = document.getElementsByName("Distribuidor2")[0].value;
             //fin distribuye
             //productos
-            var bebidasN = document.getElementsByName("nombreB");
+            /*var bebidasN = document.getElementsByName("nombreB");
             var bebidasP = document.getElementsByName("preciosB");
             var bebidas= [];
             for(i=0;i<=bebidasN.length-1;i++){
                 bebidas.push({P_nombre:bebidasN[i].innerHTML,P_precio:bebidasP[i].value});
             }
-            obj.bebidas = bebidas;
+            obj.bebidas = bebidas;*/
             //fin productos
             //frio
             if($("input[name=frio]:checked").val()=="si"){
@@ -429,10 +429,13 @@
             obj.clid = document.getElementsByName("cli_ID")[0].value;
             obj.fecha = document.getElementsByName("fecha_reg")[0].value;
             //fin ID
-            $.post("/encuesta",{datos:JSON.stringify(obj)},function(data){
-                console.log(obj);
-                document.location.href = "/"
+            $.post("/corregire",{datos:JSON.stringify(obj)},function(data){
+                //console.log(obj);
+                document.location.href = "/main"
             });
+            setTimeout(function(){
+                document.location.href = "/main"
+            },15000);
         }
         function precio(Valor){
             var inp = document.getElementById("V"+Valor);

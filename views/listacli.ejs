@@ -11,6 +11,11 @@
                 grid-template-columns: auto;
                 
             }
+            @media only screen and (max-width: 600px) {
+                .mdl-list__item-sub-title{
+                    width: 200px;
+                }
+            }
             </style>
                 <div class="busqueda_cont">
                     <div class="busqueda_item" style="text-align: center;padding: 20px;">
@@ -35,11 +40,13 @@
                         <li class="mdl-list__item mdl-list__item--two-line">                            
                             <span class="mdl-list__item-primary-content" onclick="ira(`?cli=<%= cliente[i]._id %>`)">    
                                 <span style="font-weight: bold"><%= cliente[i].nombre %></span>
-                                <span class="mdl-list__item-sub-title" style="max-width: 400px;"><%= cliente[i].direccion %></span>
+                                <span class="mdl-list__item-sub-title largo" style="max-width: 500px"><%= cliente[i].direccion %></span>
                             </span>
                             <div style="display: grid; grid-template-columns: auto auto">
                                 <div style="margin-right: 10px" onclick="corregird(`?cli=<%= cliente[i]._id %>`)"><i class="material-icons">edit</i></div>
+                                <%if(cliente[i].materiales.length > 0){ %>
                                 <div style="margin-left: 10px; padding-right: 10px" onclick="corregire(`?cli=<%= cliente[i]._id %>`)"><i class="material-icons">description</i></div>
+                                <% } %>
                             </div>
                         </li>
                         <% } %>

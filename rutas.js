@@ -161,7 +161,6 @@ module.exports = function(app, passport){
             share:data.caras,
             comentario:data.comen
         }
-        console.log(registro)
         //console.log(registro)
         cliente.update({_id:data.clid},{$set:registro},function(){});
         res.send(true);

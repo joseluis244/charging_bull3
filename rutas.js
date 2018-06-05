@@ -52,6 +52,12 @@ module.exports = function(app, passport){
             res.render(lista+".ejs",{cliente:clientes})
         });
     });
+    app.get("/listastodo",function(req,res){
+        //var lista = req.params.lista;
+        cliente.find({},null,{sort:{_id:-1}},function(err,clientes){
+            res.render("listacli.ejs",{cliente:clientes})
+        });
+    });
     app.get("/datos/:datos/:id",function(req,res){
         var datos = req.params.datos;
         var id = req.params.id;

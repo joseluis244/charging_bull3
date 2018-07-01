@@ -109,23 +109,19 @@
         });
         <% } %>
         function cargar(){
-            $("#loader").show();
-            $("#contenido").hide();
+            $("#loader").hide();
+            $("#contenido").show();
             setTimeout(()=>{
                 carga = document.location.href.split("#")[1]
                 switch(carga){
                     case "clientes":
                         $.get("/listas/listacli",function(data){
                             $("#contenido").html(data);
-                            $("#loader").hide();
-                            $("#contenido").show();
                         });
                         break;
                     case "clientestodo":
                         $.get("/listastodo",function(data){
                             $("#contenido").html(data);
-                            $("#loader").hide();
-                            $("#contenido").show();
                         });
                         break;
                 };

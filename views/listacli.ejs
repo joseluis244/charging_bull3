@@ -1,6 +1,19 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
             <style>
+            .Ncli{
+                width: 30%;
+                display: inline-block;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .Ncli:hover{
+                overflow: visible;
+            }
+            .Fcli{
+                text-align: left;
+            }
             .mdl-list__item-sub-title{
                 white-space: nowrap;
                 text-overflow: ellipsis;
@@ -27,6 +40,16 @@
                     <ul class="mdl-list">
 
                         <% for(i=0;i<=cliente.length-1;i++){ %>
+                            <% if(cliente[i].vitacora.length > 0) { %>
+                            <% var k = cliente[i].vitacora.length-1 %>
+                            <% var dia = cliente[i].vitacora[k].fecha.getDate()%>
+                            <% var mes = cliente[i].vitacora[k].fecha.getMonth()+1%>
+                            <% var ano = cliente[i].vitacora[k].fecha.getFullYear()%>
+                            <% } else{ %>
+                            <% var dia = 00%>
+                            <% var mes = 00%>
+                            <% var ano = 00%>
+                            <%}%>
                             <%
                              var icon = cliente[i].tipo;
                              switch(icon){
@@ -39,7 +62,7 @@
                             %>
                         <li class="mdl-list__item mdl-list__item--two-line">                            
                             <span class="mdl-list__item-primary-content" onclick="ira(`?cli=<%= cliente[i]._id %>`)">    
-                                <span style="font-weight: bold"><%= cliente[i].nombre %></span>
+                                <span class="Ncli" style="font-weight: bold"><%= cliente[i].nombre %></span><span class="Fcli"><%-dia+"/"+mes+"/"+ano%></span>
                                 <span class="mdl-list__item-sub-title largo" style="max-width: 500px"><%= cliente[i].direccion %></span>
                             </span>
                             <div style="display: grid; grid-template-columns: auto auto">

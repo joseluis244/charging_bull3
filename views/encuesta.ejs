@@ -238,9 +238,11 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script>
         var fecha = new Date();
+        var fechadb = new Date();
         var dd = fecha.getDate();
         var mm = fecha.getMonth()+1;
         var yyyy = fecha.getFullYear();
+        console.log(fechadb)
         if(dd<10){
             dd='0'+dd;
         } 
@@ -309,7 +311,7 @@
             //fin caras
             //ID
             obj.clid = document.getElementsByName("cli_ID")[0].value;
-            obj.fecha = document.getElementsByName("fecha_reg")[0].value;
+            obj.fecha = fechadb;
             //fin ID
             $.post("/encuesta",{datos:JSON.stringify(obj)},function(data){
                 console.log(obj);

@@ -11,6 +11,10 @@
                 grid-template-columns: auto;
                 
             }
+            .nombrecli{
+                display: inline-block;
+                width: 20%;
+            }
             @media only screen and (max-width: 600px) {
                 .mdl-list__item-sub-title{
                     width: 200px;
@@ -39,7 +43,19 @@
                             %>
                         <li class="mdl-list__item mdl-list__item--two-line">                            
                             <span class="mdl-list__item-primary-content" onclick="ira(`?cli=<%= cliente[i]._id %>`)">    
-                                <span style="font-weight: bold"><%= cliente[i].nombre %></span>
+                                <span class="nombrecli" style="font-weight: bold"><%= cliente[i].nombre %></span><% if(tipo == "adm"){%>
+                                    <span>Ultima visita:
+                                        <% if(cliente[i].vitacora.length >= 1){ %>
+                                            <% 
+                                            var Dfecha = new Date (cliente[i].vitacora[cliente[i].vitacora.length-1].fecha)
+                                            var Dmes = Dfecha.getMonth() + 1;
+                                            var STRfecha = Dfecha.getDate()+"/"+Dmes+"/"+Dfecha.getFullYear()  
+                                            %>
+                                            <%= STRfecha %>
+                                        <%} else{%>
+                                            Sin Visita
+                                        <%} %>
+                                    </span><%}%>
                                 <span class="mdl-list__item-sub-title largo" style="max-width: 500px"><%= cliente[i].direccion %></span>
                             </span>
                             <div style="display: grid; grid-template-columns: auto auto">

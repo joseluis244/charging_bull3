@@ -32,6 +32,7 @@
             <div class="mdl-layout__header-row" style="padding-left: 40px">
                 <span class="mdl-layout__title">Registro de nuevo cliente</span>
                 <div class="mdl-layout-spacer"></div>
+                
             </div>
         </header>
         <main class="mdl-layout__content" style="padding: 10px">
@@ -159,6 +160,11 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
     <script>
+        const fecha = new Date();
+        let mes = fecha.getMonth()+1;
+        let fechaview = fecha.getDate()+"/"+mes+"/"+fecha.getFullYear()
+        $("#fecha").html(fechaview)
+        console.log(fecha)
         function validar() {
                 if ($("#nombrecli").val() == "" || $("#direccion").val() == "") {
                     alert("faltan datos");

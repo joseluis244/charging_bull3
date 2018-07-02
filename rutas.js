@@ -49,13 +49,13 @@ module.exports = function(app, passport){
     app.get("/listas/:lista",function(req,res){
         var lista = req.params.lista;
         cliente.find({},null,{limit:100,sort:{_id:-1}},function(err,clientes){
-            res.render(lista+".ejs",{cliente:clientes})
+            res.render(lista+".ejs",{cliente:clientes,tipo:req.user.tipo})
         });
     });
     app.get("/listastodo",function(req,res){
         //var lista = req.params.lista;
         cliente.find({},null,{sort:{_id:-1}},function(err,clientes){
-            res.render("listacli.ejs",{cliente:clientes})
+            res.render("listacli.ejs",{cliente:clientes,tipo:req.user.tipo})
         });
     });
     app.get("/datos/:datos/:id",function(req,res){

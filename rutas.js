@@ -112,17 +112,19 @@ module.exports = function(app, passport){
     });
     app.get("/dash",function(req,res){
         dbs.moda(function(prom){
+
             dbs.cantidades(function(cant){
                 dbs.clientes(function(Tcli){
                     dbs.materialess(function(materiales){
-                        var obj = {total:cant.total,vende:cant.vende,RB:cant.RB};
-                        var Bnom = ["Red Bull","Rush", "Ciclon", "Black", "Moster"];
+                        var obj = {total:cant.total,vende:cant.vende,RB:prom.cantidad[0]};
+                        var Bnom = ["Red Bull","Rush", "Ciclon 500ml", "Black", "Moster"];
                         var Bprecios = prom.moda;
                         var Bcant = prom.cantidad;
                         res.render("dash.ejs",{cantidad:obj,bebidas:Bnom,Bprecio:Bprecios,Bcant:Bcant,Tcli:Tcli,materiales:materiales});
                     })
                 })
             });
+
         })
     });
     app.get("/downloadxls",function(req,res){

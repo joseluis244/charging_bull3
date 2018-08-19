@@ -106,6 +106,7 @@ function cantidades(callback){
         });       
     });
 }
+
 function clientes(callback){
     var tipos=[];
     var cantidades = [];

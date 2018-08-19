@@ -101,7 +101,6 @@ function visibility(visbi) {
     return '"visibility":"","Colgante":"' + visib[0] + '", "Sticker de lata":"' + visib[1] + '", "Marca Precio":"' + visib[2] + '", "Cartoon":"' + visib[3] + '", "Lata Aluminio":"' + visib[4] + '", "Sticky shlef":"' + visib[5] + '", "Carrileras":"' + visib[6] + '", "Two Cans":"' + visib[7] + '", "Parasite SC":"' + visib[8] + '","Parasite 4Pack":"' + visib[9] + '", "Dispensador Lata":"' + visib[10] + '", "Rack":"' + visib[11] + '",';
 }
 function complementos(cli) {
-    console.log(cli.share.redbull)
     if (cli.share.redbull == "" || cli.share.otro == "") {
         var r = "No";
         var o = "No";

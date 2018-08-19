@@ -20,6 +20,7 @@
     "express-session": "^1.15.6",
     "eyes": "^0.1.8",
     "json2xls": "^0.1.2",
+    "mathjs": "^5.1.0",
     "mongoose": "^5.0.13",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",

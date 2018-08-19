@@ -111,13 +111,13 @@ module.exports = function(app, passport){
         });
     });
     app.get("/dash",function(req,res){
-        dbs.promedios(function(prom){
+        dbs.moda(function(prom){
             dbs.cantidades(function(cant){
                 dbs.clientes(function(Tcli){
                     dbs.materialess(function(materiales){
                         var obj = {total:cant.total,vende:cant.vende,RB:cant.RB};
-                        var Bnom = prom.nombre;
-                        var Bprecios = prom.precio;
+                        var Bnom = ["Red Bull","Rush", "Ciclon", "Black", "Moster"];
+                        var Bprecios = prom.moda;
                         var Bcant = prom.cantidad;
                         res.render("dash.ejs",{cantidad:obj,bebidas:Bnom,Bprecio:Bprecios,Bcant:Bcant,Tcli:Tcli,materiales:materiales});
                     })

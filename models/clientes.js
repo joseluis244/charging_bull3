@@ -31,6 +31,8 @@ var ClienteSchema = mongoose.Schema({
                     productos:[{P_nombre:String,
                                 P_precio:String}],
                     share:{redbull:String,
-                            otro:String}}]
+                            otro:String},
+                    comentario: String,
+                    }]
 },{collection : 'clientes'});
 module.exports = mongoose.model('clientes', ClienteSchema);

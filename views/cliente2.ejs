@@ -56,7 +56,8 @@
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
         <header class="mdl-layout__header">
             <div class="mdl-layout__header-row" style="padding-left: 20px">
-                <span class="mdl-layout__title"><%= nombre %></span>
+                <span style="cursor: pointer;" onclick="window.history.back()"><i class="material-icons">arrow_back_ios</i></span>
+                <span class="mdl-layout__title" style="margin-left: 10px"><%= nombre %></span>
                 <div class="mdl-layout-spacer"></div>
                 <div id="infoico"><i class="material-icons" onclick="show()">info</i></div>
                 <nav class="mdl-navigation" id="nav1">

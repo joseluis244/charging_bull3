@@ -5,26 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 </head>
 <body>
-    <div ng-app="myApp" ng-controller="myCtrl">
-
-        First Name: <input type="text" ng-model="firstName"><br>
-        Last Name: <input type="text" ng-model="lastName"><br>
-        <br>
-        Full Name: {{firstName + " " + lastName}}
-        <div>{{ date_expression | date : format : shortDate}}</div>
-
-    </div>
-
-    <script>
-        var app = angular.module('myApp', []);
-        app.controller('myCtrl', function($scope) {
-            var date = new Date();
-            $scope.firstName= date;
-            $scope.lastName= "Doe";
-        });
-    </script>
+    <h1 id="hora"></h1>
 </body>
+<script src="moment.js"></script>
+<script>
+    document.getElementById('hora').innerHTML = moment().format('LTS');
+</script>
 </html>

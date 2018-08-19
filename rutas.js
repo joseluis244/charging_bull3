@@ -5,7 +5,7 @@ var proveedores = require("./models/proveedores");
 var productos = require("./models/productos");
 var materiales =require("./models/materiales");
 var dbs = require("./promedios");
-var xls= require("./xlsx2");
+var xls= require("./xlsx3");
 var getgps= require("./cluster/gps");
 //var encuesta = encuestadata();
 
@@ -191,7 +191,8 @@ module.exports = function(app, passport){
                     distribuidor:data.distribuidor,
                     materiales:data.mariales,
                     productos:data.bebidas,
-                    share:data.caras
+                    share:data.caras,
+                    comentario:data.comen
                     }
                 }
             },function(){});

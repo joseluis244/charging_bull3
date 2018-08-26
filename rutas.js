@@ -7,7 +7,10 @@ var materiales =require("./models/materiales");
 var dbs = require("./promedios");
 var xls= require("./xlsx3");
 var getgps= require("./cluster/gps");
-//var encuesta = encuestadata();
+var formidable = require('formidable');
+var fs = require('fs')
+
+
 
 module.exports = function(app, passport){
     //GET
@@ -112,7 +115,6 @@ module.exports = function(app, passport){
     });
     app.get("/dash",function(req,res){
         dbs.moda(function(prom){
-
             dbs.cantidades(function(cant){
                 dbs.clientes(function(Tcli){
                     dbs.materialess(function(materiales){
@@ -142,7 +144,22 @@ module.exports = function(app, passport){
         })
     })
     //POST
-
+    app.post('/api/photo',function(req,res){
+        var form = new formidable.IncomingForm();
+        form.uploadDir = 'uploads/';
+        form.parse(req, function(err, fields, files) { 
+            var extencion = files.userPhoto.name.split('.')[files.userPhoto.name.split('.').length-1];
+            var file_name = files.userPhoto.path.split('/')[1]+'.'+extencion;
+            fs.rename(files.userPhoto.path,files.userPhoto.path+'.'+extencion);
+            res.redirect("/");
+            var imagen = {
+                fecha: Date(),
+                nombre: file_name
+            }
+            //console.log(fields.id2)
+            cliente.update({_id:fields.id2},{$push:{fotos:imagen}},function(){});
+        });
+    });
     app.post("/corregir",function(req,res){
         registro={
             cli_id:req.body.id,

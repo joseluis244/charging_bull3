@@ -12,45 +12,6 @@ var math = require("mathjs");
 })*/
 
 
-function promedios(callback){
-    var cantidad = [];
-    var precios = [];
-    cli.find({distribuye:true},function(err,cli) {
-        productos.find({},function(err,prd){
-            for(i=0;i<=prd.length-1;i++){
-                cantidad.push(0);
-                precios.push(0);
-            }
-            for(i=0;i<=cli.length-1;i++){
-                for(j=0;j<=cli[i].productos.length-1;j++){
-                    var PP = cli[i].productos[j].P_precio;
-                    if(PP <= 0 || cli[i].productos[j].P_precio == null){}
-                    else{
-                        for(k=0;k<=prd.length-1;k++){
-                            var CP = cli[i].productos[j].P_nombre;
-                            if( CP == prd[k].nombre){
-                                precios[k] += PP;
-                                cantidad[k] ++;
-                                break;
-                            }
-                        }                
-                    }
-
-                }
-            }
-            //aqui finaliza analicis
-            var promedios = {nombre:[],precio:[],cantidad:[]}
-            for(i=0;i<=prd.length-1;i++){
-                promedios.nombre.push(prd[i].nombre);
-                var Vprom = precios[i]/cantidad[i];
-                promedios.precio.push(Vprom.toFixed(2));
-                promedios.cantidad.push(cantidad[i]);
-            }
-            callback(promedios);  
-        })
-    })
-}
-
 function moda(callback){
     cli.find({ $or: [{ "distribuye": true }, { "distribuye": false }] }, { "productos": 1, "_id": 0 }, function (err, cli) {
         var redbull = []
@@ -169,7 +130,7 @@ function materialess(callback){
     })
 }
 
-module.exports.promedios = promedios;
+//module.exports.promedios = promedios;
 module.exports.moda = moda;
 module.exports.cantidades = cantidades;
 module.exports.clientes = clientes;

@@ -33,6 +33,10 @@ var ClienteSchema = mongoose.Schema({
                     share:{redbull:String,
                             otro:String},
                     comentario: String,
-                    }]
+                    }],
+        fotos:[{
+            fecha: Date,
+            nombre: String
+        }]
 },{collection : 'clientes'});
 module.exports = mongoose.model('clientes', ClienteSchema);

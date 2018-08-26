@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
     <link rel="icon" href="img/redbull-icon.png" type="img/gif" sizes="16x16">
     <style>
+        #vista1{
+            display: block;
+        }
         .seccion{
             border-bottom: 1px solid #CFD8DC;
         }
@@ -23,9 +26,45 @@
         select:focus{
             outline: none;
         }
+        #vista2{
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        #vista2 .contenedor{
+            width: 500px;
+            height: 400px;
+        }
+        #vista2 .contenedor .foto_tomar{
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .camara_tomar{
+            font-size: 100px;
+            background-color: lightgray;
+            border-radius: 25px;
+            padding: 20px;
+        }
         @media screen and (max-width: 380px) {
             #fecha_D{
                 display: none;
+            }
+        }
+        @media screen and (max-height: 400px) {
+            #vista2 .contenedor{
+                display: grid;
+                grid-template-columns: auto auto;
+            }
+            .boton1_foto{
+                margin: 0px
+            }
+            .foto_botones{
+                align-items: center;
             }
         }
     </style>
@@ -40,196 +79,219 @@
             </div>
         </header>
         <main class="mdl-layout__content" style="padding: 5px">
-            <input type="hidden" value="<%= cli_id %>" name="cli_ID">
-            <input type="hidden" value="20180412" name="fecha_reg" id="fecha_reg2">
-            <!--secciones-->
-            <div class="secciones">
-                <h5 class="subtitulo">Vende energizante</h5>
-                <div class="seccion mdl-grid" onchange="cambio1()">
-                    <div class="mdl-cell mdl-cell--2-col">
-                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="si">
-                            <input type="radio" id="si" class="mdl-radio__button" name="distribuye" value="si" checked>
-                            <span class="mdl-radio__label">Si</span>
-                        </label>
-                    </div>
-                    <div class="mdl-cell mdl-cell--2-col">
-                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="no">
-                            <input type="radio" id="no" class="mdl-radio__button" name="distribuye" value="no">
-                            <span class="mdl-radio__label">No</span>
-                        </label>
+            <div id="vista1">
+                <input type="hidden" value="<%= cli_id %>" name="cli_ID">
+                <input type="hidden" value="20180412" name="fecha_reg" id="fecha_reg2">
+                <!--secciones-->
+                <div class="secciones">
+                    <h5 class="subtitulo">Vende energizante</h5>
+                    <div class="seccion mdl-grid" onchange="cambio1()">
+                        <div class="mdl-cell mdl-cell--2-col">
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="si">
+                                <input type="radio" id="si" class="mdl-radio__button" name="distribuye" value="si" checked>
+                                <span class="mdl-radio__label">Si</span>
+                            </label>
+                        </div>
+                        <div class="mdl-cell mdl-cell--2-col">
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="no">
+                                <input type="radio" id="no" class="mdl-radio__button" name="distribuye" value="no">
+                                <span class="mdl-radio__label">No</span>
+                            </label>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!--fin-->
-            <!--secciones-->
-            <div class="secciones">
-                <h5 class="subtitulo">Distribuidor de Red Bull</h5>
-                <div class="seccion mdl-grid">
-                    <div class="mdl-cell mdl-cell--4-col" onchange="distribuye()">
-                        <select name="Distribuidor" id="dis" style="width: 100%">
-                            <option value="ninguno">ninguno</option>
-                            <% for(i=0;i<=distribuidores.length-1;i++){%>
-                            <option value="<%= distribuidores[i].nombre %>"><%= distribuidores[i].nombre %></option>
+                <!--fin-->
+                <!--secciones-->
+                <div class="secciones">
+                    <h5 class="subtitulo">Distribuidor de Red Bull</h5>
+                    <div class="seccion mdl-grid">
+                        <div class="mdl-cell mdl-cell--4-col" onchange="distribuye()">
+                            <select name="Distribuidor" id="dis" style="width: 100%">
+                                <option value="ninguno">ninguno</option>
+                                <% for(i=0;i<=distribuidores.length-1;i++){%>
+                                    <option value="<%= distribuidores[i].nombre %>">
+                                        <%= distribuidores[i].nombre %>
+                                    </option>
+                                    <%}%>
+                                        <option value="otro">otro</option>
+                            </select>
+                            <div style="display: none" id="contenedordist">
+                                <div>Nombre del distribuidor</div>
+                                <input type="text" name="Distribuidor2" value="ninguno">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--fin-->
+                <!--secciones-->
+                <div class="secciones">
+                    <h5 class="subtitulo">Precios(Bs.)</h5>
+                    <div class="seccion seccion3 mdl-grid">
+                        <%for(i=0;i<=bebida.length-1;i++){%>
+                            <div class="mdl-cell mdl-cell--4-col">
+                                <!-- precio -->
+                                <div style="display: grid; grid-template-columns: 120px auto">
+                                    <div style="display: grid; align-content: center">
+                                        <div name="nombreB">
+                                            <%= bebida[i].nombre %>
+                                        </div>
+                                    </div>
+                                    <div onchange="precio('<%=i%>');">
+                                        <!-- valor -->
+                                        <div>
+                                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="<%=i%>P0">
+                                                <input type="radio" id="<%=i%>P0" class="mdl-radio__button" name="precios<%=i%>" value="0" checked>
+                                                <span class="mdl-radio__label">No vende</span>
+                                            </label>
+                                        </div>
+                                        <%for(j=0;j<=bebida[i].precios.length-1;j++){ %>
+                                            <div>
+                                                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="<%=i%>P<%=j+1%>">
+                                                    <input type="radio" id="<%=i%>P<%=j+1%>" class="mdl-radio__button" name="precios<%=i%>" value="<%=bebida[i].precios[j]%>">
+                                                    <span class="mdl-radio__label"><%=bebida[i].precios[j]%></span>
+                                                </label>
+                                            </div>
+                                            <%}%>
+                                                <div>
+                                                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="<%=i%>P<%=bebida[i].precios.length+1%>">
+                                                        <input type="radio" id="<%=i%>P<%=bebida[i].precios.length+1%>" class="mdl-radio__button" name="precios<%=i%>" value="-1">
+                                                        <span class="mdl-radio__label">otro</span>
+                                                    </label>
+                                                </div>
+                                                <!-- fin valor -->
+                                    </div>
+                                    <div style="grid-column: 1/3; display: none" id="D<%=i%>">
+                                        <input type="text" name="preciosB" id="V<%=i%>" value="0">
+                                    </div>
+                                </div>
+                                <!-- finprecio -->
+                            </div>
                             <%}%>
-                            <option value="otro">otro</option>
-                        </select>
-                        <div style="display: none" id="contenedordist">
-                            <div>Nombre del distribuidor</div>
-                            <input type="text" name="Distribuidor2" value="ninguno">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--fin-->
-            <!--secciones-->
-            <div class="secciones">
-                <h5 class="subtitulo">Precios(Bs.)</h5>
-                <div class="seccion seccion3 mdl-grid">
-                    <%for(i=0;i<=bebida.length-1;i++){%>
-                    <div class="mdl-cell mdl-cell--4-col">
-                        <!-- precio -->
-                        <div style="display: grid; grid-template-columns: 120px auto">
-                            <div style="display: grid; align-content: center">
-                                <div name="nombreB"><%= bebida[i].nombre %></div>
-                            </div>
-                            <div onchange="precio('<%=i%>');">
-                                <!-- valor -->
-                                <div>
-                                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="<%=i%>P0">
-                                        <input type="radio" id="<%=i%>P0" class="mdl-radio__button" name="precios<%=i%>" value="0" checked>
-                                        <span class="mdl-radio__label">No vende</span>
-                                    </label>
+                                <div class="mdl-cell mdl-cell--4-col">
+                                    <!-- precio -->
+                                    <div>Otro</div>
+                                    <div style="display: grid; grid-template-columns: 120px auto">
+                                        <div style="display: grid; align-content: center">
+                                            <input type="text" placeholder="Nombre" name="nombreB">
+                                        </div>
+                                        <div>
+                                            <input type="text" placeholder="Precio" name="preciosB">
+                                        </div>
+                                    </div>
+                                    <!-- finprecio -->
                                 </div>
-                                <%for(j=0;j<=bebida[i].precios.length-1;j++){ %>
-                                <div>
-                                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="<%=i%>P<%=j+1%>">
-                                        <input type="radio" id="<%=i%>P<%=j+1%>" class="mdl-radio__button" name="precios<%=i%>" value="<%=bebida[i].precios[j]%>">
-                                        <span class="mdl-radio__label"><%=bebida[i].precios[j]%></span>
-                                    </label>
+                    </div>
+                </div>
+                <!--fin-->
+                <!--secciones solo para faermacias o otros impulsos-->
+                <% if(clitipo == "Famacia" ||clitipo == "Otro Impulso" ){ %>
+                    <div class="secciones">
+                        <h5 class="subtitulo">Share</h5>
+                        <div class="seccion seccion4 mdl-grid">
+                            <div class="mdl-cell mdl-cell--4-col">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="carasO" name="NcarasC">
+                                    <label class="mdl-textfield__label" for="carasO"># caras de la categoria...</label>
+                                    <span class="mdl-textfield__error">Input is not a number!</span>
                                 </div>
-                                <%}%>
-                                <div>
-                                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="<%=i%>P<%=bebida[i].precios.length+1%>">
-                                        <input type="radio" id="<%=i%>P<%=bebida[i].precios.length+1%>" class="mdl-radio__button" name="precios<%=i%>" value="-1">
-                                        <span class="mdl-radio__label">otro</span>
-                                    </label>
+                            </div>
+                            <div class="mdl-cell mdl-cell--4-col">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="carasR" name="NcarasR">
+                                    <label class="mdl-textfield__label" for="carasR"># caras Red Bull...</label>
+                                    <span class="mdl-textfield__error">Input is not a number!</span>
                                 </div>
-                                <!-- fin valor -->
-                            </div>
-                            <div style="grid-column: 1/3; display: none" id="D<%=i%>">
-                                <input type="text" name="preciosB" id="V<%=i%>" value="0">
                             </div>
                         </div>
-                        <!-- finprecio -->
                     </div>
-                    <%}%>
-                    <div class="mdl-cell mdl-cell--4-col">
-                        <!-- precio -->
-                        <div>Otro</div>
-                        <div style="display: grid; grid-template-columns: 120px auto">
-                            <div style="display: grid; align-content: center">
-                                <input type="text" placeholder="Nombre" name="nombreB">
+                    <% } else {%>
+                        <input type="hidden" name="NcarasC" value="">
+                        <input type="hidden" name="NcarasR" value="">
+                        <% }%>
+                            <!--fin-->
+                            <!--secciones-->
+                            <div class="secciones">
+                                <h5 class="subtitulo">Hay producto frio</h5>
+                                <div class="seccion seccion5 mdl-grid">
+                                    <div class="mdl-cell mdl-cell--2-col">
+                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="friosi">
+                                            <input type="radio" id="friosi" class="mdl-radio__button" name="frio" value="si" checked>
+                                            <span class="mdl-radio__label">Si</span>
+                                        </label>
+                                    </div>
+                                    <div class="mdl-cell mdl-cell--2-col">
+                                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="friono">
+                                            <input type="radio" id="friono" class="mdl-radio__button" name="frio" value="no">
+                                            <span class="mdl-radio__label">No</span>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                                <input type="text" placeholder="Precio" name="preciosB">
+                            <!--fin-->
+                            <!--secciones-->
+                            <div class="secciones">
+                                <h5 class="subtitulo">Tipo de cooler</h5>
+                                <div class="seccion seccion6 mdl-grid">
+                                    <%for(i=0;i<=cooler.length-1;i++){ %>
+                                        <div class="mdl-cell mdl-cell--4-col">
+                                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cooler<%=i%>">
+                                                <input type="checkbox" id="cooler<%=i%>" class="mdl-checkbox__input" name="coolers" value="<%=cooler[i]%>">
+                                                <span class="mdl-checkbox__label"><%=cooler[i]%></span>
+                                            </label>
+                                        </div>
+                                        <%}%>
+                                </div>
                             </div>
+                            <!--fin-->
+                            <!--secciones-->
+                            <div class="secciones">
+                                <h5 class="subtitulo">Material de visibility</h5>
+                                <div class="seccion seccion7 mdl-grid">
+                                    <%for(i=0;i<=visibility.length-1;i++){ %>
+                                        <div class="mdl-cell mdl-cell--4-col">
+                                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="visibility<%=i%>">
+                                                <input type="checkbox" id="visibility<%=i%>" class="mdl-checkbox__input" name="visibilitys" value="<%=visibility[i]%>">
+                                                <span class="mdl-checkbox__label"><%=visibility[i]%></span>
+                                            </label>
+                                        </div>
+                                        <%}%>
+                                </div>
+                            </div>
+                            <!--fin-->
+                            <!--secciones-->
+                            <div class="seccionesN">
+                                <h5 class="subtitulo">Comentarios</h5>
+                                <div class="seccion seccion8 mdl-grid">
+                                    <div class="mdl-textfield mdl-js-textfield mdl-cell mdl-cell--4-col">
+                                        <textarea class="mdl-textfield__input" type="text" rows="3" id="sample5"></textarea>
+                                        <label class="mdl-textfield__label" for="sample5">Comentarios...</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--fin-->
+                            <div class="mdl-grid">
+                                <div class="mdl-cell mdl-cell--4-col">
+                                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="guardar()">
+                                        Guardar
+                                    </button>
+                                </div>
+                            </div>
+            </div>
+            <div id="vista2">
+                <div class="contenedor">
+                    <div style="text-align: center"> <h5 style="margin: 0px">Tomar una foto</h5></div>
+                    <form method="POST" enctype="multipart/form-data" id="enviarfoto" action="/api/photo">
+                        <div class="foto_tomar">
+                            <input type="file" name="userPhoto" accept="image/*" id="file" style="display: none">
+                            <label for="file"><i class="material-icons camara_tomar">camera_alt</i></label>
+                            <input type="hidden" name="id2" id="id2" value="">
                         </div>
-                        <!-- finprecio -->
-                    </div>
-                </div>
-            </div>
-            <!--fin-->
-            <!--secciones solo para faermacias o otros impulsos-->
-            <% if(clitipo == "Famacia" ||clitipo == "Otro Impulso" ){ %>
-            <div class="secciones">
-                <h5 class="subtitulo">Share</h5>
-                <div class="seccion seccion4 mdl-grid">
-                    <div class="mdl-cell mdl-cell--4-col">
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="carasO" name="NcarasC">
-                            <label class="mdl-textfield__label" for="carasO"># caras de la categoria...</label>
-                            <span class="mdl-textfield__error">Input is not a number!</span>
+                        <div id="upload_menssage" style="text-align:center; margin-bottom: 20px; display: none"><h5 style="margin: 0px">Imagen lista para enviar</h5></div>
+                        <div class="foto_botones" style="display: flex; justify-content: center">
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored boton1_foto" style="margin-right: 70px" id="btn_submit" onclick="enviar()" disabled>Guardar</button>
+                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored boton2_foto" id="no_submit" onclick="location.href = '/'">Sin Foto</button>
                         </div>
-                    </div>
-                    <div class="mdl-cell mdl-cell--4-col">
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" type="number" pattern="-?[0-9]*(\.[0-9]+)?" id="carasR" name="NcarasR">
-                            <label class="mdl-textfield__label" for="carasR"># caras Red Bull...</label>
-                            <span class="mdl-textfield__error">Input is not a number!</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <% } else {%>
-                <input type="hidden" name="NcarasC" value="">
-                <input type="hidden" name="NcarasR" value="">
-            <% }%>
-            <!--fin-->
-            <!--secciones-->
-            <div class="secciones">
-                <h5 class="subtitulo">Hay producto frio</h5>
-                <div class="seccion seccion5 mdl-grid">
-                    <div class="mdl-cell mdl-cell--2-col">
-                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="friosi">
-                            <input type="radio" id="friosi" class="mdl-radio__button" name="frio" value="si" checked>
-                            <span class="mdl-radio__label">Si</span>
-                        </label>
-                    </div>
-                    <div class="mdl-cell mdl-cell--2-col">
-                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="friono">
-                            <input type="radio" id="friono" class="mdl-radio__button" name="frio" value="no">
-                            <span class="mdl-radio__label">No</span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <!--fin-->
-            <!--secciones-->
-            <div class="secciones">
-                <h5 class="subtitulo">Tipo de cooler</h5>
-                <div class="seccion seccion6 mdl-grid">
-                    <%for(i=0;i<=cooler.length-1;i++){ %>
-                    <div class="mdl-cell mdl-cell--4-col">
-                        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cooler<%=i%>">
-                            <input type="checkbox" id="cooler<%=i%>" class="mdl-checkbox__input" name="coolers" value="<%=cooler[i]%>">
-                            <span class="mdl-checkbox__label"><%=cooler[i]%></span>
-                        </label>
-                    </div>
-                    <%}%>
-                </div>
-            </div>
-            <!--fin-->
-            <!--secciones-->
-            <div class="secciones">
-                <h5 class="subtitulo">Material de visibility</h5>
-                <div class="seccion seccion7 mdl-grid">
-                    <%for(i=0;i<=visibility.length-1;i++){ %>
-                    <div class="mdl-cell mdl-cell--4-col">
-                        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="visibility<%=i%>">
-                            <input type="checkbox" id="visibility<%=i%>" class="mdl-checkbox__input" name="visibilitys" value="<%=visibility[i]%>">
-                            <span class="mdl-checkbox__label"><%=visibility[i]%></span>
-                        </label>
-                    </div>
-                    <%}%>
-                </div>
-            </div>
-            <!--fin-->
-            <!--secciones-->
-            <div class="seccionesN">
-                <h5 class="subtitulo">Comentarios</h5>
-                <div class="seccion seccion8 mdl-grid">
-                    <div class="mdl-textfield mdl-js-textfield mdl-cell mdl-cell--4-col">
-                        <textarea class="mdl-textfield__input" type="text" rows= "3" id="sample5" ></textarea>
-                        <label class="mdl-textfield__label" for="sample5">Comentarios...</label>
-                    </div>
-                </div>
-            </div>
-            <!--fin-->
-            <div class="mdl-grid">
-                <div class="mdl-cell mdl-cell--4-col">
-                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="guardar()">
-                        Guardar
-                    </button>
+                    </form>
                 </div>
             </div>
         </main>
@@ -242,6 +304,33 @@
         var dd = fecha.getDate();
         var mm = fecha.getMonth()+1;
         var yyyy = fecha.getFullYear();
+        var CLIID = document.getElementsByName("cli_ID")[0].value
+        document.getElementById('file').addEventListener('change',function(e){
+            document.getElementById('btn_submit').disabled = false;
+            document.getElementById('no_submit').disabled = true;
+            document.getElementById('upload_menssage').style.display = 'block';
+            document.getElementById('id2').value = CLIID
+        })
+        function enviar(){
+            document.getElementById('upload_menssage').innerHTML = '<h5 style="margin: 0px">Subiendo foto al servidor</h5>';
+            setTimeout(function(){
+                document.getElementById('btn_submit').disabled = true;
+            },2000)
+        }
+        $(document).ready(function () {
+                $('#enviarfoto').submit(function () {
+                    $(this).ajaxSubmit({
+                        error: function (xhr) {
+                            status('Error: ' + xhr.status);
+                        },
+                        success: function (response) {
+                            $("#status").empty().text(response);
+                        }
+                    });
+                    return false;
+                });
+            });
+
         console.log(fechadb)
         if(dd<10){
             dd='0'+dd;
@@ -314,8 +403,8 @@
             obj.fecha = fechadb;
             //fin ID
             $.post("/encuesta",{datos:JSON.stringify(obj)},function(data){
-                console.log(obj);
-                document.location.href = "/"
+                document.getElementById("vista1").style.display = "none";
+                document.getElementById("vista2").style.display = "flex";
             });
         }
         function precio(Valor){

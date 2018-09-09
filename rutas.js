@@ -49,11 +49,29 @@ module.exports = function(app, passport){
 		req.logout();
 		res.redirect('/login');
     });
-    app.get("/listas/:lista",function(req,res){
+    app.get("/listas/:lista", function (req, res) {
         var lista = req.params.lista;
-        cliente.find({},null,{limit:100,sort:{_id:-1}},function(err,clientes){
-            res.render(lista+".ejs",{cliente:clientes,tipo:req.user.tipo})
-        });
+        if (req.user.ciudad == "Santa Cruz" || req.user.ciudad == "La Paz") {
+            cliente.find({ "ciudad": req.user.ciudad }, null, { limit: 100, sort: { _id: -1 } }, function (err, clientes) {
+                res.render(lista + ".ejs", { cliente: clientes, tipo: req.user.tipo })
+            });
+        }
+        else {
+            cliente.find({}, null, { limit: 100, sort: { _id: -1 } }, function (err, clientes) {
+                res.render(lista + ".ejs", { cliente: clientes, tipo: req.user.tipo })
+            });
+        }
+    });
+    app.get("/region", function (req, res) {
+        //var lista = req.params.lista;
+        if (req.user.ciudad == "Santa Cruz" || req.user.ciudad == "La Paz") {
+            cliente.find({"ciudad": req.user.ciudad}, null, { sort: { _id: -1 } }, function (err, clientes) {
+                res.render("listacli.ejs", { cliente: clientes, tipo: req.user.tipo })
+            });
+        }
+        else{
+            res.send("Error de Usuario")
+        }
     });
     app.get("/listastodo",function(req,res){
         //var lista = req.params.lista;
@@ -143,6 +161,9 @@ module.exports = function(app, passport){
             res.render("mapcluster.ejs",{cli:cli});
         })
     })
+    app.get("/galeria",isLoggedIn,function(req,res){
+        res.sendfile("views/galeria.html")
+    })
     //POST
     app.post('/api/photo',function(req,res){
         var form = new formidable.IncomingForm();
@@ -150,7 +171,7 @@ module.exports = function(app, passport){
         form.parse(req, function(err, fields, files) { 
             var extencion = files.userPhoto.name.split('.')[files.userPhoto.name.split('.').length-1];
             var file_name = files.userPhoto.path.split('/')[1]+'.'+extencion;
-            fs.rename(files.userPhoto.path,files.userPhoto.path+'.'+extencion);
+            fs.rename(files.userPhoto.path,files.userPhoto.path+'.'+extencion,function(err){});
             res.redirect("/");
             var imagen = {
                 fecha: Date(),

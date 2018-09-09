@@ -69,11 +69,15 @@
             <nav class="mdl-navigation">
                 <a class="mdl-navigation__link" href="">Inicio</a>
                 <a class="mdl-navigation__link" href="#clientes" onclick="cargar()">Ver Clientes</a>
+                <% if(tipo == "usr"){ %>
+                <a class="mdl-navigation__link" href="#region" onclick="cargar()">Toda la Region</a>
+                <% } %>
                 <a class="mdl-navigation__link" href="#clientestodo" onclick="cargar()">Todos los Clientes</a>
                 <a class="mdl-navigation__link" href="#materiales" onclick="cargar()">Ver Materiales</a>
                 <a class="mdl-navigation__link" href="./registrar">Registrar Clientes</a>
                 <a class="mdl-navigation__link" href="./configuraciones">Configuraciones</a>
                 <% if(tipo == "adm"){ %>
+                <!-- <a class="mdl-navigation__link" href="#galeria" onclick="cargar()">Galeria</a> -->
                 <a class="mdl-navigation__link" href="./mapagral" target="_blank">Ver mapa</a>
                 <% } %>
                 <a class="mdl-navigation__link" href="./logout"><strong>Salir</strong></a>
@@ -121,6 +125,16 @@
                         break;
                     case "clientestodo":
                         $.get("/listastodo",function(data){
+                            $("#contenido").html(data);
+                        });
+                        break;
+                    case "region":
+                        $.get("/region",function(data){
+                            $("#contenido").html(data);
+                        });
+                        break;
+                    case "galeria":
+                        $.get("/galeria",function(data){
                             $("#contenido").html(data);
                         });
                         break;

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <title>Fotos</title>
+    <style>
+        .nombre {
+            position: fixed;
+            height: 50px;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            padding-left: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 22px;
+            background-color: #3949ab;
+            color: white;
+            box-shadow: 0px 2px 8px #cccccc;
+        }
+    
+        .fotos {
+            position: absolute;
+            top: 55px;
+            left: 0px;
+            right: 0px;
+            z-index: -1
+        }
+    
+        .foto_img {
+            height: 300px;
+            border-top: 1px solid #cccc;
+            background-image: url("../uploads/upload_0bee4d5b9fb76ef5ff11113c0b9288e2.jpg");
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+        }
+        .foto_img::before {
+            transform: rotate(30deg)
+        }
+        .foto_fecha {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            border-top: 1px solid #cccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="nombre">Nombre</div>
+    <div class="fotos">
+        <div class="foto_img"></div>
+        <div class="foto_fecha">fecha</div>
+    </div>
+</body>
+</html>

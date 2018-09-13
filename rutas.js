@@ -164,6 +164,12 @@ module.exports = function(app, passport){
     app.get("/galeria",isLoggedIn,function(req,res){
         res.sendfile("views/galeria.html")
     })
+    app.get("/vergaleria",function(req,res){
+        res.render("galeriaver.ejs")
+    })
+    app.get("/uploads/*",function(req,res){
+        res.sendfile("uploads/"+req.params[0])
+    })
     //POST
     app.post('/api/photo',function(req,res){
         var form = new formidable.IncomingForm();

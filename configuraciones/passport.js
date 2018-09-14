@@ -1,5 +1,6 @@
 var LocalStrategy   = require('passport-local').Strategy;
 var User            = require('../models/usuarios');
+var fs = require("fs");
 module.exports = function(passport) {
     passport.use('local',new LocalStrategy({
         usernameField : 'username',

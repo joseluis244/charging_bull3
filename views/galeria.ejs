@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <title>Galeria</title>
+    <style>
+        #G_body{
+            padding: 10px;
+        }
+        #G_body .lista ul li{
+            border-bottom: 1px solid #cccccc;
+        }
+        #G_body .ciudad{
+            border-bottom: 1px solid #cccccc;
+            background-color: #303f9f;
+            color: white;
+        }
+    </style>
+</head>
+<body id="G_body">
+    <%  console.log(cli2[0].ciudad) %>
+    <% var ciu = cli2[0].ciudad; %>
+    <% var i = 0 %>
+
+    <div class="ciudad">
+        <h4>Santa Cruz</h4>
+    </div>
+    <div class="lista">
+        <ul class="mdl-list">
+            <% while( ciu == 'Santa Cruz' && i <= cli2.length-1 ){%>
+            <li class="mdl-list__item">
+                <span class="mdl-list__item-primary-content" onclick="verfotos(this,'<%=  cli2[i]._id %>')">
+                    <%=  cli2[i].nombre %>
+                </span>
+            </li>
+            <%
+                ciu = cli2[i].ciudad;
+                i=i+1;
+            }%>
+
+        </ul>
+    </div>
+    <div class="ciudad">
+        <h4>La Paz</h4>
+    </div>
+    <div class="lista">
+        <ul class="mdl-list">
+            <% while( ciu == 'La Paz' && i <= cli2.length-1 ){%>
+            <li class="mdl-list__item">
+                <span class="mdl-list__item-primary-content" cli_id="qweqwe" onclick="verfotos(this,'<%=  cli2[i]._id %>')">
+                    <%=  cli2[i].nombre %>
+                </span>
+            </li>
+            <%
+                ciu = cli2[i].ciudad;
+                i=i+1;
+            }%>
+        </ul>
+    </div>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script>
+        function verfotos(este,id){
+            console.log(este.getAttribute("cli_id"))
+            window.open("./vergaleria?clid="+id,"_blank")
+        }
+    </script>
+</body>
+</html>

@@ -161,11 +161,18 @@ module.exports = function(app, passport){
             res.render("mapcluster.ejs",{cli:cli});
         })
     })
-    app.get("/galeria",isLoggedIn,function(req,res){
-        res.sendfile("views/galeria.html")
+    app.get("/galeria",function(req,res){
+        cliente.find({ "fotos": { $exists: true } },{},{sort:{"ciudad": -1}},function(err,CLI){
+            //console.log(CLI)        
+            res.render("galeria.ejs",{cli2:CLI})
+        })
     })
     app.get("/vergaleria",function(req,res){
-        res.render("galeriaver.ejs")
+        console.log(req.param("clid"))
+        cliente.findById(req.param("clid"),{nombre:1,fotos:1},function(err,CLI){
+            console.log(CLI);
+            res.render("galeriaver.ejs",{nombre:CLI.nombre,fotos:CLI.fotos})
+        })
     })
     app.get("/uploads/*",function(req,res){
         res.sendfile("uploads/"+req.params[0])

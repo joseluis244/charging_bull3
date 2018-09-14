@@ -25,3 +25,23 @@
     "permiso" : "usr", 
     "estado" : 1.0
 }
+{ 
+    "_id" : ObjectId("5b95782454b9f525f84700c5"), 
+    "username" : "usuario_scz", 
+    "password" : "usuario", 
+    "nombre" : "Usuario", 
+    "tipo" : "usr", 
+    "permiso" : "usr", 
+    "estado" : 1.0, 
+    "ciudad" : "Santa Cruz"
+}
+{ 
+    "_id" : ObjectId("5b95784e54b9f525f84700c6"), 
+    "username" : "usuario_lpz", 
+    "password" : "usuario", 
+    "nombre" : "Usuario", 
+    "tipo" : "usr", 
+    "permiso" : "usr", 
+    "estado" : 1.0, 
+    "ciudad" : "La Paz"
+}

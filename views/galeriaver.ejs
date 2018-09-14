@@ -80,9 +80,11 @@
 </head>
 <body>
     <header>
-        Nombre cliente
+        <span style="cursor: pointer;" onclick="window.close()"><i class="material-icons">arrow_back_ios</i></span>
+        <%= nombre %>
     </header>
     <main>
+        <% for(i=0;i<=fotos.length-1;i++){ %>
         <div class="cont_img">
             <div class="cont_foto">
                 <div class="giro" onclick="giro(-90,this)">
@@ -91,7 +93,7 @@
                     </i>
                 </div>
                 <div class="foto">
-                    <img src="../uploads/upload_0531c0e9f567b61cf0bd9930d75c689d.jpg" alt="">
+                    <img src="../uploads/<%= fotos[i].nombre %>" alt="">
                 </div>
                 <div class="giro" onclick="giro(90,this)">
                     <i class="material-icons">
@@ -99,12 +101,29 @@
                     </i>
                 </div>
             </div>
-            <div class="fecha">dd/mm/aaaa</div>
+            <%
+            var disfecha;
+            var dia =  fotos[i].fecha.getDate();
+            var mes = fotos[i].fecha.getMonth()+1;
+            var year = fotos[i].fecha.getFullYear();
+            disfecha = dia+"/"+mes+"/"+year
+             %>
+            <div class="fecha"><%= disfecha%></div>
         </div>
+        <% } %>
     </main>
     <script>
         function giro(G,este){
-            este.parentElement.getElementsByTagName("img")[0].style.transform = "rotate("+G+"deg)"
+            if(este.parentElement.getElementsByTagName("img")[0].style.transform == ""){
+                var rot = 0;
+                var giro = rot + G;
+                este.parentElement.getElementsByTagName("img")[0].style.transform = "rotate("+giro+"deg)"
+            }
+            else{
+                var rot = este.parentElement.getElementsByTagName("img")[0].style.transform.split("(")[1].split("deg")[0];
+                var giro = parseInt(rot) + G;
+                este.parentElement.getElementsByTagName("img")[0].style.transform = "rotate("+giro+"deg)"
+            }
         }
     </script>
 </body>

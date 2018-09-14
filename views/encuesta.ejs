@@ -301,6 +301,12 @@
     <script>
         var fecha = new Date();
         var fechadb = new Date();
+        var GPS = [];
+        navigator.geolocation.getCurrentPosition(function(Position){
+            GPS[0] = Position.coords.latitude;
+            GPS[1] = Position.coords.longitude;
+            GPS[2] = Position.coords.accuracy;
+        })
         var dd = fecha.getDate();
         var mm = fecha.getMonth()+1;
         var yyyy = fecha.getFullYear();
@@ -402,6 +408,9 @@
             obj.clid = document.getElementsByName("cli_ID")[0].value;
             obj.fecha = fechadb;
             //fin ID
+            //GPS
+            obj.GPS = GPS;
+            //fin GPS
             $.post("/encuesta",{datos:JSON.stringify(obj)},function(data){
                 document.getElementById("vista1").style.display = "none";
                 document.getElementById("vista2").style.display = "flex";

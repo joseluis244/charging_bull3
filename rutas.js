@@ -238,6 +238,7 @@ module.exports = function(app, passport){
         } },function(){});
 
         cliente.update({_id:data.clid},{$push:{vitacora:{
+                    GPS:data.GPS,
                     fecha:data.fecha,
                     usuario:req.user.nombre,
                     distribuye:data.vende,

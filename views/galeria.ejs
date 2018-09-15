@@ -32,11 +32,13 @@
     <div class="lista">
         <ul class="mdl-list">
             <% while( ciu == 'Santa Cruz' && i <= cli2.length-1 ){%>
+            <% if(cli2[i].fotos.length > 0){%>
             <li class="mdl-list__item">
                 <span class="mdl-list__item-primary-content" onclick="verfotos(this,'<%=  cli2[i]._id %>')">
                     <%=  cli2[i].nombre %>
                 </span>
             </li>
+            <% } %>
             <%
                 ciu = cli2[i].ciudad;
                 i=i+1;

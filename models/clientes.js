@@ -22,7 +22,9 @@ var ClienteSchema = mongoose.Schema({
                 otro:Number},
         ciudad: String,
     //vitacora
-        vitacora:[{fecha:Date,
+        vitacora:[{
+                    GPS:[],
+                    fecha:Date,
                     usuario:String,
                     distribuye:Boolean,
                     distribuidor:String,

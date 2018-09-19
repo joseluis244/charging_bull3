@@ -1,6 +1,5 @@
 var tipo = require("./models/tiposclientes");
 var cliente = require("./models/clientes");
-var User = require('./models/usuarios');
 var proveedores = require("./models/proveedores");
 var productos = require("./models/productos");
 var materiales =require("./models/materiales");
@@ -43,7 +42,7 @@ module.exports = function(app, passport){
         })
     });
     app.get("/login",function(req,res){
-        res.sendfile("./html/login.html")
+        res.sendfile("./html/login.html");
     });
     app.get('/logout', isLoggedIn, function(req, res) {
 		req.logout();
@@ -238,6 +237,7 @@ module.exports = function(app, passport){
         } },function(){});
 
         cliente.update({_id:data.clid},{$push:{vitacora:{
+                    GPS:data.GPS,
                     fecha:data.fecha,
                     usuario:req.user.nombre,
                     distribuye:data.vende,
@@ -254,7 +254,9 @@ module.exports = function(app, passport){
         res.send("asd");
     });
     app.post("/login",
-        passport.authenticate('local', { failureRedirect: '/login' }),
+        passport.authenticate('local', { 
+            failureRedirect: '/login' 
+        }),
         function(req, res) {
         res.redirect('/main');
         }

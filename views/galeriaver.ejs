@@ -84,6 +84,9 @@
         <%= nombre %>
     </header>
     <main>
+        <% if(fotos.length == 0){ %>
+            <span>No ahi fotos guardadas</span>
+        <%}%>
         <% for(i=0;i<=fotos.length-1;i++){ %>
         <div class="cont_img">
             <div class="cont_foto">

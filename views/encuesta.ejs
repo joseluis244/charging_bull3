@@ -269,7 +269,7 @@
                             <!--fin-->
                             <div class="mdl-grid">
                                 <div class="mdl-cell mdl-cell--4-col">
-                                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" onclick="guardar()">
+                                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="save_btn" onclick="guardar()" disabled>
                                         Guardar
                                     </button>
                                 </div>
@@ -304,6 +304,7 @@
             GPS[0] = Position.coords.latitude;
             GPS[1] = Position.coords.longitude;
             GPS[2] = Position.coords.accuracy;
+            document.getElementById("save_btn").disabled = false;
         })
         var dd = fecha.getDate();
         var mm = fecha.getMonth()+1;

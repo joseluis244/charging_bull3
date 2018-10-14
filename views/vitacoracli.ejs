@@ -19,7 +19,7 @@
                 <tbody>
                         <% for(i=0;i<=fecha.length-1;i++){ %>
                     <tr>
-                        <td class="mdl-data-table__cell--non-numeric" onclick="ver('<%= i %>')"><%=fecha[i].fecha%></td>
+                        <td class="mdl-data-table__cell--non-numeric" ><%= printfecha(fecha[i]) %> <span style="float: right; cursor: pointer" onclick="posicionmarca(<%= GPS[0] %>,<%= GPS[1] %>,<%= fecha[i].GPS[0] %>,<%= fecha[i].GPS[1] %>)" ><i class="material-icons">map</i></span></td>
                     </tr>
                         <%}%>
                 </tbody>
@@ -27,9 +27,17 @@
         </div>
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>  
     <script>
-        function ver(id){
-            console.log(id);
+        function posicionmarca(){
+            console.log("asd")
         }
     </script>  
 </body>
 </html>
+<%
+function printfecha(fecha){
+    var dia = fecha.fecha.getDate();
+    var mes = fecha.fecha.getMonth() + 1;
+    var year = fecha.fecha.getFullYear();
+    return(dia+"/"+mes+"/"+year)
+}
+%>

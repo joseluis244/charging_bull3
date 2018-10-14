@@ -84,7 +84,7 @@ module.exports = function(app, passport){
         switch(datos){
             case "vitacoracli":
                 cliente.findById(id,function(err,cliente){
-                    res.render("vitacoracli.ejs",{fecha:cliente.vitacora});
+                    res.render("vitacoracli.ejs",{fecha:cliente.vitacora,GPS:cliente.GPS});
                 })
                 break;
             case "datoscli":
@@ -233,7 +233,8 @@ module.exports = function(app, passport){
             productos:data.bebidas,
             frio:data.frio,
             share:data.caras,
-            comentario:data.comen
+            comentario:data.comen,
+            ultima_visita:data.fecha
         } },function(){});
 
         cliente.update({_id:data.clid},{$push:{vitacora:{

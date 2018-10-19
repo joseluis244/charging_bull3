@@ -35,9 +35,13 @@
 </html>
 <%
 function printfecha(fecha){
+    const dias = ["Dom","Lun","Mar","Mier","Jue","Vie","Sab"];
+    const meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+    var Ldia = fecha.fecha.getDay();
     var dia = fecha.fecha.getDate();
-    var mes = fecha.fecha.getMonth() + 1;
+    var mes = fecha.fecha.getMonth();
     var year = fecha.fecha.getFullYear();
-    return(dia+"/"+mes+"/"+year)
+    var minuto = fecha.fecha.getMinutes()<10?"0"+fecha.fecha.getMinutes():fecha.fecha.getMinutes();
+    return(dias[Ldia]+" "+dia+" de "+meses[mes]+" del "+year+" "+fecha.fecha.getHours()+":"+minuto)
 }
 %>

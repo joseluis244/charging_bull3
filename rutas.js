@@ -226,7 +226,7 @@ module.exports = function(app, passport){
 
     app.post("/encuesta",function(req,res){
         var data = JSON.parse(req.body.datos);
-        cliente.update({_id:data.clid},{$set:{
+        cliente.update({_id:data.clid},{
             distribuye:data.vende,
             distribuidor:data.distribuidor,
             materiales:data.mariales,
@@ -235,7 +235,7 @@ module.exports = function(app, passport){
             share:data.caras,
             comentario:data.comen,
             ultima_visita:data.fecha
-        } },function(){});
+        },function(){});
 
         cliente.update({_id:data.clid},{$push:{vitacora:{
                     GPS:data.GPS,

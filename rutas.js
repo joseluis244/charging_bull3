@@ -183,7 +183,7 @@ module.exports = function(app, passport){
     //POST
     app.post("/test",function(req,res){
         var fecha = new Date(req.body.fecha)
-        fecha.setUTCHours(-4)
+        fecha.setUTCHours(-2)
         console.log(fecha)
         res.send(fecha)
     })

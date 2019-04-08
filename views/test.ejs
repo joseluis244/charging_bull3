@@ -13,7 +13,9 @@
         let fecha = new Date();
         console.log(fecha);
         function guardar(){
-            $.post('/test',{fecha:fecha})
+            $.post('/test',{fecha:fecha},function(data){
+                console.log(data)
+            })
         }
     </script>
 </body>

@@ -176,7 +176,14 @@ module.exports = function(app, passport){
     app.get("/uploads/*",function(req,res){
         res.sendfile("uploads/"+req.params[0])
     })
+
+    app.get("/test",function(req,res){
+        res.render('test.ejs')
+    })
     //POST
+    app.post("/test",function(req,res){
+        console.log(req.body)
+    })
     app.post('/api/photo',function(req,res){
         var form = new formidable.IncomingForm();
         form.uploadDir = 'uploads/';

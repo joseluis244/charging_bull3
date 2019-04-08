@@ -183,7 +183,7 @@ module.exports = function(app, passport){
     //POST
     app.post("/test",function(req,res){
         var fecha = new Date(req.body.fecha)
-        console.log(fecha)
+        console.log(fecha.getTimezoneOffset())
         res.send(fecha)
     })
     app.post('/api/photo',function(req,res){

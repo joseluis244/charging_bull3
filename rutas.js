@@ -182,7 +182,8 @@ module.exports = function(app, passport){
     })
     //POST
     app.post("/test",function(req,res){
-        console.log(req.body)
+        let fecha = new Date(req.body.fecha)
+        console.log(fecha)
     })
     app.post('/api/photo',function(req,res){
         var form = new formidable.IncomingForm();

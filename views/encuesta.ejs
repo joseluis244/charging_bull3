@@ -305,7 +305,7 @@
             GPS[1] = Position.coords.longitude;
             GPS[2] = Position.coords.accuracy;
             document.getElementById("save_btn").disabled = false;
-        })
+        },function(err){console.log(err)},{enableHighAccuracy: true})
         var dd = fecha.getDate();
         var mm = fecha.getMonth()+1;
         var yyyy = fecha.getFullYear();

@@ -189,7 +189,7 @@
             var maker = new google.maps.Marker({
                 map: map
             });
-            navigator.geolocation.getCurrentPosition(showPosition, showError,{timeout:10000});
+            navigator.geolocation.getCurrentPosition(showPosition, showError,{timeout:10000,enableHighAccuracy: true});
             function showPosition(position){
                 document.getElementById("lat").value = position.coords.latitude;
                 document.getElementById("lng").value = position.coords.longitude;
